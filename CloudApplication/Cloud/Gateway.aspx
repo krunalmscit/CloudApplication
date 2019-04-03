@@ -370,7 +370,7 @@
                             <asp:ListItem Text="TF (No Tip)" Value="TF"></asp:ListItem>
                             <asp:ListItem Text="TB ($ on Credit and Debit)" Value="TB"></asp:ListItem>
                             <asp:ListItem Text="TC (% on Credit and Debit)" Value="TC"></asp:ListItem>
-                            <asp:ListItem Text="TH ($ and % option on Credit and Debit)" Value="TC"></asp:ListItem>
+                            <asp:ListItem Text="TH ($ and % option on Credit and Debit)" Value="TH"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-sm-4">

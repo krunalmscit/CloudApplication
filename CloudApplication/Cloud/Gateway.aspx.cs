@@ -2,15 +2,11 @@
 using MonerisDAL.App_Code;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CloudApplication.Cloud
 {
@@ -32,29 +28,31 @@ namespace CloudApplication.Cloud
         protected void Page_Load(object sender, EventArgs e)
         {
             //txtStoreID.Text = "monca00597";
-            //txtAPIToken.Text = "hxgbcbBXNEASN6wiGLFP";
+            //txtAPIToken.Text = "7Xq0zhMcaVKBCkAV4rX5";
             //txtTerminalId.Text = "E1194378";
-            if (Request.QueryString != null)
-            {
-                if (!string.IsNullOrWhiteSpace(Request.QueryString["orderId"]))
-                    txtOrderID.Text = Request.QueryString["orderId"].ToString().Trim();
-                if (!string.IsNullOrWhiteSpace(Request.QueryString["txnNumber"]))
-                    txtTxnNumber.Text = Request.QueryString["txnNumber"].ToString().Trim();
-                if (!string.IsNullOrWhiteSpace(Request.QueryString["storeId"]))
-                    txtStoreID.Text = Request.QueryString["storeId"].ToString().Trim();
-                if (!string.IsNullOrWhiteSpace(Request.QueryString["apiToken"]))
-                    txtAPIToken.Text = Request.QueryString["apiToken"].ToString().Trim();
-                if (!string.IsNullOrWhiteSpace(Request.QueryString["terminalId"]))
-                    txtTerminalId.Text = Request.QueryString["terminalId"].ToString().Trim();
-                if (!string.IsNullOrWhiteSpace(Request.QueryString["amount"]))
-                    txtAmount.Text = Request.QueryString["amount"].ToString().Trim();
-            }
+
+           
 
             if (!IsPostBack)
             {
                 //btnSaveDB.Visible = false;
                 //lblDbSave.Visible = false;
                 lblFollowOn.Visible = false;
+                if (Request.QueryString != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(Request.QueryString["orderId"]))
+                        txtOrderID.Text = Request.QueryString["orderId"].ToString().Trim();
+                    if (!string.IsNullOrWhiteSpace(Request.QueryString["txnNumber"]))
+                        txtTxnNumber.Text = Request.QueryString["txnNumber"].ToString().Trim();
+                    if (!string.IsNullOrWhiteSpace(Request.QueryString["storeId"]))
+                        txtStoreID.Text = Request.QueryString["storeId"].ToString().Trim();
+                    if (!string.IsNullOrWhiteSpace(Request.QueryString["apiToken"]))
+                        txtAPIToken.Text = Request.QueryString["apiToken"].ToString().Trim();
+                    if (!string.IsNullOrWhiteSpace(Request.QueryString["terminalId"]))
+                        txtTerminalId.Text = Request.QueryString["terminalId"].ToString().Trim();
+                    if (!string.IsNullOrWhiteSpace(Request.QueryString["amount"]))
+                        txtAmount.Text = Request.QueryString["amount"].ToString().Trim();
+                }
             }
 
         }
@@ -90,6 +88,7 @@ namespace CloudApplication.Cloud
 
         protected void btnPreauth_Click(object sender, EventArgs e)
         {
+
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
             transaction.terminalId = txtTerminalId.Text.Trim();
@@ -220,8 +219,6 @@ namespace CloudApplication.Cloud
             transaction.apiToken = txtAPIToken.Text.Trim();
             transaction.terminalId = txtTerminalId.Text.Trim();
             transaction.txnType = "forcePost";
-            string motoValue;
-
 
             transaction.request = new CloudTransaction.Request()
             {
@@ -382,7 +379,7 @@ namespace CloudApplication.Cloud
             {
                 if (Session["poolRcpt"] != null)
                 {
-                    var r = (CloudPoolingResponse.RootObject)Session["poolRcpt"];
+                    CloudPoolingResponse.RootObject r = (CloudPoolingResponse.RootObject)Session["poolRcpt"];
                     string URL = r.Receipt.receiptUrl;
                     if (URL != null && !string.IsNullOrEmpty(URL))
                     {
@@ -392,7 +389,7 @@ namespace CloudApplication.Cloud
                                                             {
                                                                 NullValueHandling = NullValueHandling.Ignore
                                                             });
-                        var v = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
+                        CloudReceipt.Rootobject v = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
                         //txtTxnNumber.Text = v.receipt.TransId;
                         Session["FollowOn"] = txtPollingReceipt.Text;
                     }
@@ -415,7 +412,11 @@ namespace CloudApplication.Cloud
                 {
                     lblFollowOn.Text = "";
                 }
+                if (!string.IsNullOrEmpty(txtRequest.Text) && !string.IsNullOrEmpty(txtRespose.Text) && !string.IsNullOrEmpty(txtPollingReceipt.Text))
+                    db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
             }
+
+
             catch
             {
 
@@ -556,7 +557,7 @@ namespace CloudApplication.Cloud
                                             });
             jsonRequest = JsonConvert.SerializeObject(transaction, Formatting.Indented);
             lblRequestUrl.Text = postUrl;
-            var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+            StringContent content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
             if (!string.IsNullOrEmpty(txtPollingReceipt.Text))
             {
                 txtPollingReceipt.Text = "";
@@ -565,7 +566,7 @@ namespace CloudApplication.Cloud
             }
             try
             {
-                using (var client = new HttpClient())
+                using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage result = await client.PostAsync(postUrl, content);
                     resultContent = await result.Content.ReadAsStringAsync();
@@ -574,6 +575,32 @@ namespace CloudApplication.Cloud
                     syncRecpt = JsonConvert.DeserializeObject<CloudPoolingResponse.RootObject>(resultContent);
                     Session["PoolRcpt"] = syncRecpt;
                 }
+
+                // I think need to create async and wait method to push new 
+
+                // logic for to keep polling until got complete is true
+                //if (syncRecpt.Receipt.Error == "false" && !string.IsNullOrEmpty(syncRecpt.Receipt.receiptUrl))
+                //{
+                //    // do polling untill I get complete == true
+                //    CloudReceipt.Rootobject pollingReceipt = null;
+                //    while (pollingReceipt.receipt.Completed == "true") 
+                //    {
+                //        txtPollingReceipt.Text = JsonConvert.SerializeObject(poolReceipt(syncRecpt.Receipt.receiptUrl)
+                //                                            , Formatting.Indented
+                //                                            , new JsonSerializerSettings
+                //                                            {
+                //                                                NullValueHandling = NullValueHandling.Ignore
+                //                                            });
+                //        pollingReceipt = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
+                //    }
+                //}
+                //else
+                //{
+                //    // do not do polling
+
+                //}
+
+
             }
             catch (Exception clouse)
             {
@@ -587,9 +614,9 @@ namespace CloudApplication.Cloud
 
         public CloudReceipt.Rootobject poolReceipt(string URL)
         {
-            var request = (HttpWebRequest)WebRequest.Create(URL);
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             if (!string.IsNullOrEmpty(responseString))
             {
                 cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(responseString);
