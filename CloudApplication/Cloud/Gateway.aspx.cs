@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CloudApplication.Cloud
 {
@@ -128,7 +129,9 @@ namespace CloudApplication.Cloud
                 transaction.txnType = "completion";
                 transaction.request = new CloudTransaction.Request()
                 {
-                    orderId = cloudRece.receipt.ReceiptId,
+                    // Change request to send a diffrent order ID in completion
+                    //orderId = cloudRece.receipt.ReceiptId,
+                    orderId = txtOrderID.Text.Trim(),
                     amount = txtAmount.Text.ToString().Trim(),
                     txnNumber = cloudRece.receipt.TransId
                 };
@@ -149,7 +152,8 @@ namespace CloudApplication.Cloud
                 transaction.txnType = "refund";
                 transaction.request = new CloudTransaction.Request()
                 {
-                    orderId = cloudRece.receipt.ReceiptId,
+                    //orderId = cloudRece.receipt.ReceiptId,
+                    orderId = txtOrderID.Text.Trim(),
                     amount = txtAmount.Text.ToString().Trim(),
                     txnNumber = cloudRece.receipt.TransId
                 };
@@ -174,7 +178,8 @@ namespace CloudApplication.Cloud
                 transaction.txnType = "purchaseCorrection";
                 transaction.request = new CloudTransaction.Request()
                 {
-                    orderId = cloudRece.receipt.ReceiptId,
+                    //orderId = cloudRece.receipt.ReceiptId,
+                    orderId = txtOrderID.Text.Trim(),
                     amount = txtAmount.Text.ToString().Trim(),
                     txnNumber = cloudRece.receipt.TransId
                 };
@@ -576,30 +581,7 @@ namespace CloudApplication.Cloud
                     Session["PoolRcpt"] = syncRecpt;
                 }
 
-                // I think need to create async and wait method to push new 
-
-                // logic for to keep polling until got complete is true
-                //if (syncRecpt.Receipt.Error == "false" && !string.IsNullOrEmpty(syncRecpt.Receipt.receiptUrl))
-                //{
-                //    // do polling untill I get complete == true
-                //    CloudReceipt.Rootobject pollingReceipt = null;
-                //    while (pollingReceipt.receipt.Completed == "true") 
-                //    {
-                //        txtPollingReceipt.Text = JsonConvert.SerializeObject(poolReceipt(syncRecpt.Receipt.receiptUrl)
-                //                                            , Formatting.Indented
-                //                                            , new JsonSerializerSettings
-                //                                            {
-                //                                                NullValueHandling = NullValueHandling.Ignore
-                //                                            });
-                //        pollingReceipt = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
-                //    }
-                //}
-                //else
-                //{
-                //    // do not do polling
-
-                //}
-
+                //await getReceiptAsync();
 
             }
             catch (Exception clouse)
@@ -608,6 +590,36 @@ namespace CloudApplication.Cloud
             }
             finally
             {
+
+            }
+        }
+
+        private async Task getReceiptAsync()
+        {
+            WebClient client = new WebClient();
+            // I think need to create async and wait method to push new 
+
+            // logic for to keep polling until got complete is true
+            if (syncRecpt.Receipt.Error == "false" && !string.IsNullOrEmpty(syncRecpt.Receipt.receiptUrl))
+            {
+                
+                // do polling untill I get complete == true
+                CloudReceipt.Rootobject pollingReceipt = null;
+                while (pollingReceipt.receipt.Completed == "true") 
+                {
+                    var result = await Task.Run(() => poolReceipt(syncRecpt.Receipt.receiptUrl));
+                    txtPollingReceipt.Text = JsonConvert.SerializeObject(result
+                                                        , Formatting.Indented
+                                                        , new JsonSerializerSettings
+                                                        {
+                                                            NullValueHandling = NullValueHandling.Ignore
+                                                        });
+                    pollingReceipt = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
+                } 
+            }
+            else
+            {
+                // do not do polling
 
             }
         }
