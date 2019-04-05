@@ -127,10 +127,12 @@ namespace CloudApplication.Cloud
                 {
                     // Change request to send a diffrent order ID in completion
                     //orderId = cloudRece.receipt.ReceiptId,
-                    orderId = txtOrderID.Text.Trim(),
-                    amount = txtAmount.Text.ToString().Trim(),
-                    txnNumber = cloudRece.receipt.TransId
+
                 };
+                transaction.request.orderId = txtOrderID.Text.Trim();
+                transaction.request.amount = txtAmount.Text.ToString().Trim();
+                //transaction.request.txnNumber = cloudRece.receipt.TransId;
+                transaction.request.txnNumber = txtTxnNumber.Text.Trim();
                 performTransactionAsync();
             }
         }
@@ -413,8 +415,8 @@ namespace CloudApplication.Cloud
                 {
                     lblFollowOn.Text = "";
                 }
-                if (!string.IsNullOrEmpty(txtRequest.Text) && !string.IsNullOrEmpty(txtRespose.Text) && !string.IsNullOrEmpty(txtPollingReceipt.Text))
-                    db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
+                //if (!string.IsNullOrEmpty(txtRequest.Text) && !string.IsNullOrEmpty(txtRespose.Text) && !string.IsNullOrEmpty(txtPollingReceipt.Text))
+                   // db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
             }
 
 
@@ -575,7 +577,7 @@ namespace CloudApplication.Cloud
                     syncRecpt = JsonConvert.DeserializeObject<CloudPoolingResponse.RootObject>(resultContent);
                     Session["PoolRcpt"] = syncRecpt;
                 }
-                await getReceiptAsync();
+                //await getReceiptAsync();
             }
             catch (Exception clouse)
             {
@@ -594,6 +596,7 @@ namespace CloudApplication.Cloud
                     pollingReceipt = await Task.Run(() => poolReceipt(syncRecpt.Receipt.receiptUrl));
 
                 } while (pollingReceipt.receipt.Completed != "true");
+                Session["FollowOn"] = txtPollingReceipt.Text;
                 txtPollingReceipt.Text = JsonConvert.SerializeObject(pollingReceipt
                                                         , Formatting.Indented
                                                         , new JsonSerializerSettings
@@ -602,7 +605,7 @@ namespace CloudApplication.Cloud
                                                         });
 
                 CloudReceipt.Rootobject cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
-                
+
                 if (Request.QueryString.AllKeys.Count() == 0)
                 {
                     if (cloudRece != null && (cloudRece.receipt.TxnName.ToLower().Trim() == "purchase" || cloudRece.receipt.TxnName.ToLower().Trim() == "preauth"))
