@@ -19,20 +19,16 @@ namespace CloudApplication.Cloud
         private static string resultContent = string.Empty;
         CloudTransaction transaction = new CloudTransaction();
         private CloudPoolingResponse.RootObject syncRecpt = new CloudPoolingResponse.RootObject();
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["dbConnectionString"].ToString();
+        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["awsInternalDB"].ToString();
         CloudReceipt.Rootobject cloudRece = new CloudReceipt.Rootobject();
         GatewayDbRespository db = new GatewayDbRespository();
-        bool returnURL = false;
 
-        public GatewayDbRespository Db { get => db; set => db = value; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //txtStoreID.Text = "monca00597";
             //txtAPIToken.Text = "7Xq0zhMcaVKBCkAV4rX5";
             //txtTerminalId.Text = "E1194378";
-
-           
 
             if (!IsPostBack)
             {
@@ -552,7 +548,6 @@ namespace CloudApplication.Cloud
             if (chkMoto.Checked)
                 transaction.request.moto = true;
 
-
             txtRequest.Text = JsonConvert.SerializeObject(
                                             transaction,
                                             Formatting.Indented,
@@ -580,47 +575,79 @@ namespace CloudApplication.Cloud
                     syncRecpt = JsonConvert.DeserializeObject<CloudPoolingResponse.RootObject>(resultContent);
                     Session["PoolRcpt"] = syncRecpt;
                 }
-
-                //await getReceiptAsync();
-
+                await getReceiptAsync();
             }
             catch (Exception clouse)
             {
                 resultContent = clouse.InnerException.Message.ToString();
-            }
-            finally
-            {
-
             }
         }
 
         private async Task getReceiptAsync()
         {
             WebClient client = new WebClient();
-            // I think need to create async and wait method to push new 
-
-            // logic for to keep polling until got complete is true
             if (syncRecpt.Receipt.Error == "false" && !string.IsNullOrEmpty(syncRecpt.Receipt.receiptUrl))
             {
-                
-                // do polling untill I get complete == true
-                CloudReceipt.Rootobject pollingReceipt = null;
-                while (pollingReceipt.receipt.Completed == "true") 
+                CloudReceipt.Rootobject pollingReceipt = new CloudReceipt.Rootobject();
+                do
                 {
-                    var result = await Task.Run(() => poolReceipt(syncRecpt.Receipt.receiptUrl));
-                    txtPollingReceipt.Text = JsonConvert.SerializeObject(result
+                    pollingReceipt = await Task.Run(() => poolReceipt(syncRecpt.Receipt.receiptUrl));
+
+                } while (pollingReceipt.receipt.Completed != "true");
+                txtPollingReceipt.Text = JsonConvert.SerializeObject(pollingReceipt
                                                         , Formatting.Indented
                                                         , new JsonSerializerSettings
                                                         {
                                                             NullValueHandling = NullValueHandling.Ignore
                                                         });
-                    pollingReceipt = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
-                } 
+
+                CloudReceipt.Rootobject cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
+                
+                if (Request.QueryString.AllKeys.Count() == 0)
+                {
+                    if (cloudRece != null && (cloudRece.receipt.TxnName.ToLower().Trim() == "purchase" || cloudRece.receipt.TxnName.ToLower().Trim() == "preauth"))
+                    {
+                        lblFollowOn.Visible = true;
+                        lblFollowOn.Text = Request.Url.ToString() + "?orderid=" + cloudRece.receipt.ReceiptId + "&txnNumber=" + cloudRece.receipt.TransId + "&storeId=" + txtStoreID.Text.Trim() + "&apiToken=" + txtAPIToken.Text.Trim() + "&terminalId=" + txtTerminalId.Text.Trim() + "&amount=" + cloudRece.receipt.Amount;
+
+                    }
+                    else { lblFollowOn.Visible = false; }
+                }
+                else
+                {
+                    lblFollowOn.Text = "";
+                }
+
+                //if (!string.IsNullOrEmpty(txtRequest.Text) && !string.IsNullOrEmpty(txtRespose.Text) && !string.IsNullOrEmpty(txtPollingReceipt.Text))
+                //    db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
             }
             else
             {
-                // do not do polling
+            }
+        }
 
+        private async Task getReceiptAsyncParrallel()
+        {
+            WebClient client = new WebClient();
+
+            if (syncRecpt.Receipt.Error == "false" && !string.IsNullOrEmpty(syncRecpt.Receipt.receiptUrl))
+            {
+                CloudReceipt.Rootobject pollingReceipt = new CloudReceipt.Rootobject();
+                do
+                {
+                    pollingReceipt = await Task.Run(() => poolReceipt(syncRecpt.Receipt.receiptUrl));
+
+                } while (pollingReceipt.receipt.Completed != "true");
+
+                txtPollingReceipt.Text = JsonConvert.SerializeObject(pollingReceipt
+                                                        , Formatting.Indented
+                                                        , new JsonSerializerSettings
+                                                        {
+                                                            NullValueHandling = NullValueHandling.Ignore
+                                                        });
+            }
+            else
+            {
             }
         }
 
@@ -634,7 +661,7 @@ namespace CloudApplication.Cloud
                 cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(responseString);
             }
             RestContorols();
-            //
+
             return cloudRece;
         }
 

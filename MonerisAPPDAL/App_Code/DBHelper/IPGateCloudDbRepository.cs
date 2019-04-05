@@ -119,7 +119,7 @@ namespace MonerisDAL.App_Code.DBHelper
                     }
                 }
             }
-            catch (Exception EX)
+            catch 
             { }
             finally
             {
@@ -208,7 +208,7 @@ namespace MonerisDAL.App_Code.DBHelper
                 }
                 return transactions.OrderBy(o=>o.Tid).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

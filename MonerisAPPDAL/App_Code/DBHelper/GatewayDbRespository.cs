@@ -55,7 +55,7 @@ namespace MonerisAPPDAL.App_Code.DBHelper
                     }
                 }
             }
-            catch (Exception rr)
+            catch
             {
                 flag = false;
                 //lblDbSave.Visible = true;
