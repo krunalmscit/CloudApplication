@@ -452,7 +452,8 @@
         </div>
 
         <div class="col-lg-12">
-            <asp:Label ID="lblRequestUrl" runat="server"></asp:Label>
+            <%--<asp:Label ID="lblRequestUrl" runat="server"></asp:Label>--%>
+            <asp:Label ID="lblFollowOn" runat="server"></asp:Label>
         </div>
 
         <div class="row col-lg-12">
@@ -487,7 +488,7 @@
 
 
         <div class="row col-lg-12">
-            <asp:Button ID="btnPool" runat="server" OnClick="btnPool_Click" Text="Polling Receipt" CssClass="btn btn-danger" />
+            <%--<asp:Button ID="btnPool" runat="server" OnClick="btnPool_Click" Text="Polling Receipt" CssClass="btn btn-danger" />--%>
             <%--<asp:Button runat="server" ID="btnSaveDB" OnClick="btnSaveDB_Click" Text=" Save To DB" CssClass="btn btn-primary" />--%>
             <%--<asp:Label runat="server" ID="lblDbSave"></asp:Label>--%>
         </div>
@@ -497,7 +498,7 @@
             <%--<asp:TextBox ID="txtTranNote" runat="server" CssClass="form-control" placeholder="Comment to save in DB"></asp:TextBox>--%>
         </div>
         <div>
-            <asp:Label ID="lblFollowOn" runat="server"></asp:Label>
+            
         </div>
     </form>
 </body>

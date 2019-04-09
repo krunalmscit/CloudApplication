@@ -526,13 +526,13 @@ namespace CloudApplication.Cloud {
         protected global::System.Web.UI.WebControls.Button btnBarCodeScan;
         
         /// <summary>
-        /// lblRequestUrl control.
+        /// lblFollowOn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRequestUrl;
+        protected global::System.Web.UI.WebControls.Label lblFollowOn;
         
         /// <summary>
         /// txtRequest control.
@@ -560,23 +560,5 @@ namespace CloudApplication.Cloud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPollingReceipt;
-        
-        /// <summary>
-        /// btnPool control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPool;
-        
-        /// <summary>
-        /// lblFollowOn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFollowOn;
     }
 }

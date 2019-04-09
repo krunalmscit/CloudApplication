@@ -555,7 +555,7 @@ namespace CloudApplication.Cloud
                                                 NullValueHandling = NullValueHandling.Ignore
                                             });
             jsonRequest = JsonConvert.SerializeObject(transaction, Formatting.Indented);
-            lblRequestUrl.Text = postUrl;
+            //lblRequestUrl.Text = postUrl;
             StringContent content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
             if (!string.IsNullOrEmpty(txtPollingReceipt.Text))
             {
