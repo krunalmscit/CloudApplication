@@ -54,7 +54,7 @@ namespace CloudApplication.Cloud
 
         }
 
-        protected void btnPurchase_Click(object sender, EventArgs e)
+        protected async void btnPurchase_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -80,10 +80,10 @@ namespace CloudApplication.Cloud
             {
                 transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
             }
-            performTransactionAsync();
+           await performTransactionAsync();
         }
 
-        protected void btnPreauth_Click(object sender, EventArgs e)
+        protected async void btnPreauth_Click(object sender, EventArgs e)
         {
 
             transaction.storeId = txtStoreID.Text.Trim();
@@ -109,11 +109,11 @@ namespace CloudApplication.Cloud
             {
                 transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
             }
-            performTransactionAsync();
+            await performTransactionAsync();
 
         }
 
-        protected void btnCompletion_Click(object sender, EventArgs e)
+        protected async void btnCompletion_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -127,17 +127,15 @@ namespace CloudApplication.Cloud
                 {
                     // Change request to send a diffrent order ID in completion
                     //orderId = cloudRece.receipt.ReceiptId,
-
+                    orderId = txtOrderID.Text.Trim(),
+                    amount = txtAmount.Text.ToString().Trim(),
+                    txnNumber = cloudRece.receipt.TransId
                 };
-                transaction.request.orderId = txtOrderID.Text.Trim();
-                transaction.request.amount = txtAmount.Text.ToString().Trim();
-                //transaction.request.txnNumber = cloudRece.receipt.TransId;
-                transaction.request.txnNumber = txtTxnNumber.Text.Trim();
-                performTransactionAsync();
+                await performTransactionAsync();
             }
         }
 
-        protected void btnRefund_Click(object sender, EventArgs e)
+        protected async void btnRefund_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -159,11 +157,11 @@ namespace CloudApplication.Cloud
                 {
                     transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
                 }
-                performTransactionAsync();
+                await performTransactionAsync();
             }
         }
 
-        protected void btnVoid_Click(object sender, EventArgs e)
+        protected async void btnVoid_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -185,11 +183,11 @@ namespace CloudApplication.Cloud
                 {
                     transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
                 }
-                performTransactionAsync();
+                await performTransactionAsync();
             }
         }
 
-        protected void btnIndRefund_Click(object sender, EventArgs e)
+        protected async void btnIndRefund_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -213,10 +211,10 @@ namespace CloudApplication.Cloud
             {
                 transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
             }
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnFpost_Click(object sender, EventArgs e)
+        protected async void btnFpost_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -241,10 +239,10 @@ namespace CloudApplication.Cloud
             {
                 transaction.request.orderId = txtOrderID.Text.Trim().ToString();
             }
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnPairing_Click(object sender, EventArgs e)
+        protected async void btnPairing_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -255,11 +253,11 @@ namespace CloudApplication.Cloud
             {
                 pairingToken = txtPairingToken.Text.Trim().ToString()
             };
-            performTransactionAsync();
+            await performTransactionAsync();
 
         }
 
-        protected void btnunpair_Click(object sender, EventArgs e)
+        protected async void btnunpair_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -270,10 +268,10 @@ namespace CloudApplication.Cloud
             {
 
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnSetTip_Click(object sender, EventArgs e)
+        protected async void btnSetTip_Click(object sender, EventArgs e)
         {
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
@@ -284,10 +282,10 @@ namespace CloudApplication.Cloud
             {
                 tipType = drpSetTip.SelectedItem.Value
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnBatchClose_Click(object sender, EventArgs e)
+        protected async void btnBatchClose_Click(object sender, EventArgs e)
         {
             transaction.txnType = "batchClose";
             transaction.terminalId = txtTerminalId.Text.Trim();
@@ -295,10 +293,10 @@ namespace CloudApplication.Cloud
             {
 
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnOpenTotal_Click(object sender, EventArgs e)
+        protected async void btnOpenTotal_Click(object sender, EventArgs e)
         {
             transaction.txnType = "openTotal";
             transaction.terminalId = txtTerminalId.Text.Trim();
@@ -306,10 +304,10 @@ namespace CloudApplication.Cloud
             {
 
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnInit_Click(object sender, EventArgs e)
+        protected async void btnInit_Click(object sender, EventArgs e)
         {
             transaction.txnType = "initialization";
             transaction.terminalId = txtTerminalId.Text.Trim();
@@ -317,10 +315,10 @@ namespace CloudApplication.Cloud
             {
 
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnCardRead_Click(object sender, EventArgs e)
+        protected async void btnCardRead_Click(object sender, EventArgs e)
         {
             transaction.txnType = "cardRead";
             transaction.terminalId = txtTerminalId.Text.Trim();
@@ -328,10 +326,10 @@ namespace CloudApplication.Cloud
             {
 
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnCashback_Click(object sender, EventArgs e)
+        protected async void btnCashback_Click(object sender, EventArgs e)
         {
             transaction.txnType = "cashback";
             transaction.terminalId = txtTerminalId.Text.Trim();
@@ -347,10 +345,10 @@ namespace CloudApplication.Cloud
                     new CloudTransaction.Request.Credit() { cardPlan = "M", limit = txtMCCashBackLimit.Text.Trim()}
                 }
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnSurcharge_Click(object sender, EventArgs e)
+        protected async void btnSurcharge_Click(object sender, EventArgs e)
         {
             transaction.txnType = "surcharge";
             transaction.request = new CloudTransaction.Request()
@@ -358,10 +356,10 @@ namespace CloudApplication.Cloud
                 surchargeFee = txtSurcharge.Text.Trim(),
                 mode = drpSurcharge.SelectedItem.Value
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnBarCodeScan_Click(object sender, EventArgs e)
+        protected async void btnBarCodeScan_Click(object sender, EventArgs e)
         {
             transaction.txnType = "scanBarcode";
             transaction.request = new CloudTransaction.Request()
@@ -373,59 +371,58 @@ namespace CloudApplication.Cloud
                 promptText3 = txtPrompt3.Text.Trim(),
                 promptText4 = txtPrompt4.Text.Trim()
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnPool_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Session["poolRcpt"] != null)
-                {
-                    CloudPoolingResponse.RootObject r = (CloudPoolingResponse.RootObject)Session["poolRcpt"];
-                    string URL = r.Receipt.receiptUrl;
-                    if (URL != null && !string.IsNullOrEmpty(URL))
-                    {
-                        txtPollingReceipt.Text = JsonConvert.SerializeObject(poolReceipt(URL)
-                                                            , Formatting.Indented
-                                                            , new JsonSerializerSettings
-                                                            {
-                                                                NullValueHandling = NullValueHandling.Ignore
-                                                            });
-                        CloudReceipt.Rootobject v = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
-                        //txtTxnNumber.Text = v.receipt.TransId;
-                        Session["FollowOn"] = txtPollingReceipt.Text;
-                    }
-                    //btnSaveDB.Visible = true;
-                }
+        //protected void btnPool_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (Session["poolRcpt"] != null)
+        //        {
+        //            CloudPoolingResponse.RootObject r = (CloudPoolingResponse.RootObject)Session["poolRcpt"];
+        //            string URL = r.Receipt.receiptUrl;
+        //            if (URL != null && !string.IsNullOrEmpty(URL))
+        //            {
+        //                txtPollingReceipt.Text = JsonConvert.SerializeObject(poolReceipt(URL)
+        //                                                    , Formatting.Indented
+        //                                                    , new JsonSerializerSettings
+        //                                                    {
+        //                                                        NullValueHandling = NullValueHandling.Ignore
+        //                                                    });
+        //                CloudReceipt.Rootobject v = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
+        //                //txtTxnNumber.Text = v.receipt.TransId;
+        //                Session["FollowOn"] = txtPollingReceipt.Text;
+        //            }
+        //            //btnSaveDB.Visible = true;
+        //        }
 
-                CloudReceipt.Rootobject cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
-                int i = Request.QueryString.AllKeys.Count();
-                if (Request.QueryString.AllKeys.Count() == 0)
-                {
-                    if (cloudRece != null && (cloudRece.receipt.TxnName.ToLower().Trim() == "purchase" || cloudRece.receipt.TxnName.ToLower().Trim() == "preauth"))
-                    {
-                        lblFollowOn.Visible = true;
-                        lblFollowOn.Text = Request.Url.ToString() + "?orderid=" + cloudRece.receipt.ReceiptId + "&txnNumber=" + cloudRece.receipt.TransId + "&storeId=" + txtStoreID.Text.Trim() + "&apiToken=" + txtAPIToken.Text.Trim() + "&terminalId=" + txtTerminalId.Text.Trim() + "&amount=" + cloudRece.receipt.Amount;
+        //        CloudReceipt.Rootobject cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
+        //        int i = Request.QueryString.AllKeys.Count();
+        //        if (Request.QueryString.AllKeys.Count() == 0)
+        //        {
+        //            if (cloudRece != null && (cloudRece.receipt.TxnName.ToLower().Trim() == "purchase" || cloudRece.receipt.TxnName.ToLower().Trim() == "preauth"))
+        //            {
+        //                lblFollowOn.Visible = true;
+        //                lblFollowOn.Text = Request.Url.ToString() + "?orderid=" + cloudRece.receipt.ReceiptId + "&txnNumber=" + cloudRece.receipt.TransId + "&storeId=" + txtStoreID.Text.Trim() + "&apiToken=" + txtAPIToken.Text.Trim() + "&terminalId=" + txtTerminalId.Text.Trim() + "&amount=" + cloudRece.receipt.Amount;
+        //            }
+        //            else { lblFollowOn.Visible = false; }
+        //        }
+        //        else
+        //        {
+        //            lblFollowOn.Text = "";
+        //        }
+        //        if (!string.IsNullOrEmpty(txtRequest.Text) && !string.IsNullOrEmpty(txtRespose.Text) && !string.IsNullOrEmpty(txtPollingReceipt.Text))
+        //            db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
+        //    }
 
-                    }
-                    else { lblFollowOn.Visible = false; }
-                }
-                else
-                {
-                    lblFollowOn.Text = "";
-                }
-                //if (!string.IsNullOrEmpty(txtRequest.Text) && !string.IsNullOrEmpty(txtRespose.Text) && !string.IsNullOrEmpty(txtPollingReceipt.Text))
-                   // db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
-            }
 
+        //    catch
+        //    {
 
-            catch
-            {
+        //    }
 
-            }
-
-        }
+        //}
 
         protected void btnSaveDB_Click(object sender, EventArgs e)
         {
@@ -433,7 +430,7 @@ namespace CloudApplication.Cloud
             bool success = false;
             try
             {
-                success = db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
+                success = db.InsertToCloudTransactions(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
             }
             catch (Exception ex)
             {
@@ -458,26 +455,26 @@ namespace CloudApplication.Cloud
             else
                 txtSurcharge.Enabled = true;
         }
-        protected void btnBalanceInquiery_Click(object sender, EventArgs e)
+        protected async void btnBalanceInquiery_Click(object sender, EventArgs e)
         {
             transaction.txnType = "balanceInquiry";
             transaction.request = new CloudTransaction.Request()
             {
                 entryMethod = drpEntryMethod.SelectedItem.Value
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnMPOS_Click(object sender, EventArgs e)
+        protected async void btnMPOS_Click(object sender, EventArgs e)
         {
             transaction.txnType = "mobilePosSetting";
             if (chkmPOS.Checked)
                 transaction.request = new CloudTransaction.Request() { enabled = true };
             else
                 transaction.request = new CloudTransaction.Request() { enabled = false };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
-        protected void btnPanMask_Click(object sender, EventArgs e)
+        protected async void btnPanMask_Click(object sender, EventArgs e)
         {
             transaction.txnType = "panMaskingSetting";
             if (chkPanMask.Checked)
@@ -485,11 +482,11 @@ namespace CloudApplication.Cloud
             else
                 transaction.request = new CloudTransaction.Request() { enabled = false };
 
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
 
-        protected void btnaddBinRnage_Click(object sender, EventArgs e)
+        protected async void btnaddBinRnage_Click(object sender, EventArgs e)
         {
             transaction.txnType = "addGiftBinRange";
             transaction.request = new CloudTransaction.Request()
@@ -497,10 +494,10 @@ namespace CloudApplication.Cloud
                 lowPrefix = txtLowPrefix.Text.Trim(),
                 highPrefix = txtHighPrefix.Text.Trim()
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnDeleteRange_Click(object sender, EventArgs e)
+        protected async void btnDeleteRange_Click(object sender, EventArgs e)
         {
             transaction.txnType = "deleteGiftBinRange";
             transaction.request = new CloudTransaction.Request()
@@ -508,10 +505,10 @@ namespace CloudApplication.Cloud
                 lowPrefix = txtDelLowRange.Text.Trim(),
                 highPrefix = txtDelHighRange.Text.Trim()
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnGiftCardRead_Click(object sender, EventArgs e)
+        protected async void btnGiftCardRead_Click(object sender, EventArgs e)
         {
             transaction.txnType = "giftCardRead";
             transaction.request = new CloudTransaction.Request()
@@ -519,19 +516,19 @@ namespace CloudApplication.Cloud
                 entryOptions = txtEntryOption.Text.Trim(),
                 track = txtTrack.Text.Trim()
             };
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
-        protected void btnGetBinRange_Click(object sender, EventArgs e)
+        protected async void btnGetBinRange_Click(object sender, EventArgs e)
         {
             transaction.txnType = "getGiftBinRanges";
             transaction.request = new CloudTransaction.Request();
-            performTransactionAsync();
+            await performTransactionAsync();
         }
 
         /// Helper Methods
         /// 
-        private async void performTransactionAsync()
+        private async Task performTransactionAsync()
         {
             if (lblFollowOn.Visible == true)
                 lblFollowOn.Visible = false;
@@ -577,7 +574,7 @@ namespace CloudApplication.Cloud
                     syncRecpt = JsonConvert.DeserializeObject<CloudPoolingResponse.RootObject>(resultContent);
                     Session["PoolRcpt"] = syncRecpt;
                 }
-                //await getReceiptAsync();
+                await getReceiptAsync();
             }
             catch (Exception clouse)
             {
@@ -594,18 +591,21 @@ namespace CloudApplication.Cloud
                 do
                 {
                     pollingReceipt = await Task.Run(() => poolReceipt(syncRecpt.Receipt.receiptUrl));
-
-                } while (pollingReceipt.receipt.Completed != "true");
-                Session["FollowOn"] = txtPollingReceipt.Text;
+                    if (pollingReceipt.receipt.Error == "true")
+                        break;
+                } while (pollingReceipt.receipt.Completed != "true" || pollingReceipt.receipt.Error != "false" );
+               
                 txtPollingReceipt.Text = JsonConvert.SerializeObject(pollingReceipt
                                                         , Formatting.Indented
                                                         , new JsonSerializerSettings
                                                         {
                                                             NullValueHandling = NullValueHandling.Ignore
                                                         });
+                if(!string.IsNullOrEmpty(txtPollingReceipt.Text.Trim()))
+                    Session["FollowOn"] = txtPollingReceipt.Text;
+
 
                 CloudReceipt.Rootobject cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(txtPollingReceipt.Text.Trim());
-
                 if (Request.QueryString.AllKeys.Count() == 0)
                 {
                     if (cloudRece != null && (cloudRece.receipt.TxnName.ToLower().Trim() == "purchase" || cloudRece.receipt.TxnName.ToLower().Trim() == "preauth"))
@@ -654,18 +654,23 @@ namespace CloudApplication.Cloud
             }
         }
 
-        public CloudReceipt.Rootobject poolReceipt(string URL)
+        public async Task<CloudReceipt.Rootobject> poolReceipt(string URL)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            if (!string.IsNullOrEmpty(responseString))
-            {
-                cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(responseString);
+            using (HttpClient client = new HttpClient()) {
+                var result = await client.GetStringAsync(URL);
+                return JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(result);
             }
-            RestContorols();
+            
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            //if (!string.IsNullOrEmpty(responseString))
+            //{
+            //    cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(responseString);
+            //}
+            //RestContorols();
 
-            return cloudRece;
+            //return cloudRece;
         }
 
         private void RestContorols()

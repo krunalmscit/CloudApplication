@@ -12,7 +12,7 @@ namespace MonerisAPPDAL.App_Code.DBHelper
     public class GatewayDbRespository
     {
         string connString = System.Configuration.ConfigurationManager.ConnectionStrings["dbConnectionString"].ToString();
-        public bool SaveToDb(string request, string res, string receipt) {
+        public bool InsertToCloudTransactions(string request, string res, string receipt) {
             bool flag = false;
             CloudReceipt.Rootobject cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(receipt);
             try
