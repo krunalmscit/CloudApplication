@@ -105,6 +105,7 @@ namespace MonerisDAL.App_Code
             public string EncryptedTrack1 { get; set; }
             //public string EncryptedTrack2 { get; set; }
             public string EncryptedTrack3 { get; set; }
+            public string ConditionCode { get; set; }
         }
 
 
