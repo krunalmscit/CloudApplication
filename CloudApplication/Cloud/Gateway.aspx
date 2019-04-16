@@ -84,12 +84,15 @@
 
 
         <div class="row col-lg-12" style="padding-top: 10px">
-            <div class="col-lg-4">
+            <div class="col-lg-8">
                 Environment
                        <asp:RadioButtonList ID="rdEnv" runat="server" CssClass=" form-check form-check-inline" RepeatDirection="Horizontal" CellSpacing="10">
                            <asp:ListItem Text="QA1 / QA2" Value="0"></asp:ListItem>
                            <asp:ListItem Text="Internal QA" Value="1" Selected="True"></asp:ListItem>
                        </asp:RadioButtonList>
+            </div>
+            <div class="co-lg-4">
+                App version : v1.1
             </div>
         </div>
 
