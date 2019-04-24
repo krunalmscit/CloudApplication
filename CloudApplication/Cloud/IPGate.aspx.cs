@@ -13,8 +13,8 @@ namespace CloudApplication.Cloud
     public partial class IPGate : System.Web.UI.Page
     {
         IPGateCloudTransaction transaction = new IPGateCloudTransaction();
-        //private static string postUrl = "http://ec2-52-73-55-162.compute-1.amazonaws.com/Terminal/"; // QA1, QA2
-        private static string postUrl = "https://ippostest.moneris.com/Terminal/";  // internal QA
+        private static string postUrl = "http://ec2-52-73-55-162.compute-1.amazonaws.com/Terminal/"; // QA1, QA2
+        //private static string postUrl = "https://ippostest.moneris.com/Terminal/";  // internal QA
         private static string jsonRequest = string.Empty;
         private static string resultContent = string.Empty;
         private CloudPoolingResponse.RootObject syncRecpt = new CloudPoolingResponse.RootObject();
@@ -74,7 +74,7 @@ namespace CloudApplication.Cloud
                 {
                     var resObject = (poolReceipt(URL));
                     txtAsyncResponse.Text = JsonConvert.SerializeObject(resObject, Formatting.Indented);
-                    repo.InsertDateToDB(resObject, txtRequest.Text, txtResposne.Text, txtAsyncResponse.Text, txtTestCase.Text, txtMerchantId.Text.Trim(), txtToken.Text.Trim());
+                    //repo.InsertDateToDB(resObject, txtRequest.Text, txtResposne.Text, txtAsyncResponse.Text, txtTestCase.Text, txtMerchantId.Text.Trim(), txtToken.Text.Trim());
                     //txtTxnNumber.Text = v.receipt.TransId;
                     Session["FollowOn"] = txtAsyncResponse.Text;
                     txtAmount.Text = "";
@@ -106,7 +106,7 @@ namespace CloudApplication.Cloud
                 transaction.txnType = "completion";
                 transaction.request.amount = txtAmount.Text.Trim();
                 transaction.request.cardType = cloudRece.receipt.CardType;
-                transaction.request.authCode = cloudRece.receipt.AuthCode;
+                transaction.request.originalApprovalNumber = cloudRece.receipt.AuthCode;
                 transaction.request.originalPreauthAmount = cloudRece.receipt.Amount;
                 transaction.request.pan = cloudRece.receipt.Pan;
                 transaction.request.swipeIndicator = cloudRece.receipt.SwipeIndicator;
@@ -169,7 +169,7 @@ namespace CloudApplication.Cloud
                 cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(s);
                 transaction.txnType = "purchaseCorrection";
                 transaction.request.amount = txtAmount.Text.Trim();
-                transaction.request.originalAuthCode = cloudRece.receipt.AuthCode;
+                transaction.request.originalApprovalNumber = cloudRece.receipt.AuthCode;
                 performTransactionAsync();
             }
         }
@@ -189,7 +189,7 @@ namespace CloudApplication.Cloud
                 cloudRece = JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(s);
                 transaction.txnType = "refundCorrection";
                 transaction.request.amount = txtAmount.Text.Trim();
-                transaction.request.originalAuthCode = cloudRece.receipt.AuthCode;
+                transaction.request.originalApprovalNumber = cloudRece.receipt.AuthCode;
                 performTransactionAsync();
 
             }

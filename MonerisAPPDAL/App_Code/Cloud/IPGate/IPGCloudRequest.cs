@@ -16,7 +16,7 @@ namespace MonerisDAL.App_Code
         public string invoiceNumber { get; set; }
         public string echoData { get; set; }
         public string moto { get; set; }
-        public string originalAuthCode { get; set; }
+        public string originalApprovalNumber { get; set; }
         public string cardType { get; set; }
         public string authCode { get; set; }
         public string originalPreauthAmount { get; set; }
@@ -30,7 +30,7 @@ namespace MonerisDAL.App_Code
         public string mode { get; set; }
         public string cashbackLimit { get; set; }
         public string surchargeFee { get; set; }
-        public string originalApprovalNumber { get; set; }
+        //public string originalApprovalNumber { get; set; }
         public string referenceNumber { get;  set; }
     }
 }

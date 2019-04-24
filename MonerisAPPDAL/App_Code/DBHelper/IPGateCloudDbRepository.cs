@@ -119,7 +119,7 @@ namespace MonerisDAL.App_Code.DBHelper
                     }
                 }
             }
-            catch 
+            catch (Exception c)
             { }
             finally
             {
