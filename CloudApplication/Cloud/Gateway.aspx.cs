@@ -62,7 +62,8 @@ namespace CloudApplication.Cloud
             transaction.txnType = "purchase";
             transaction.request = new CloudTransaction.Request()
             {
-                amount = txtAmount.Text.ToString().Trim()
+                amount = txtAmount.Text.ToString().Trim(),
+                echoData = txtEchoData.Text.Trim()
             };
             if (drpSetTip.SelectedItem.Value != "0")
             {
@@ -94,7 +95,8 @@ namespace CloudApplication.Cloud
             {
                 //orderId = "Test_KP_PreAuth" + System.DateTime.Now.TimeOfDay.ToString(),
                 //orderId = txtOrderID.Text.Trim(),
-                amount = txtAmount.Text.Trim()
+                amount = txtAmount.Text.Trim(),
+                echoData = txtEchoData.Text.Trim()
             };
 
             if (string.IsNullOrEmpty(txtOrderID.Text.Trim().ToString()))
@@ -129,7 +131,8 @@ namespace CloudApplication.Cloud
                     //orderId = cloudRece.receipt.ReceiptId,
                     orderId = txtOrderID.Text.Trim(),
                     amount = txtAmount.Text.ToString().Trim(),
-                    txnNumber = cloudRece.receipt.TransId
+                    txnNumber = cloudRece.receipt.TransId,
+                    echoData = txtEchoData.Text.Trim()
                 };
                 performTransactionAsync();
             }
@@ -177,12 +180,17 @@ namespace CloudApplication.Cloud
                     //orderId = cloudRece.receipt.ReceiptId,
                     orderId = txtOrderID.Text.Trim(),
                     amount = txtAmount.Text.ToString().Trim(),
-                    txnNumber = cloudRece.receipt.TransId
+                    txnNumber = cloudRece.receipt.TransId,
+                    echoData = txtEchoData.Text.Trim()
                 };
                 if (drpEntryMethod.SelectedItem.Value != "A")
                 {
                     transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
                 }
+
+                /// Need to add echo date
+
+
                 performTransactionAsync();
             }
         }
@@ -195,7 +203,6 @@ namespace CloudApplication.Cloud
             transaction.txnType = "refund";
             transaction.request = new CloudTransaction.Request()
             {
-
                 amount = txtAmount.Text.ToString().Trim()
             };
 
