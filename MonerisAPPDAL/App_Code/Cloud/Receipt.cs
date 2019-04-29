@@ -15,15 +15,15 @@ namespace MonerisDAL.App_Code
         public string ResponseCode { get; set; }
         public string ISO { get; set; }
         public string LanguageCode { get; set; }
-        public object PartialAuthAmount { get; set; }
-        public object AvailableBalance { get; set; }
-        public object TipAmount { get; set; }
-        public object EMVCashBackAmount { get; set; }
-        public object SurchargeAmount { get; set; }
-        public object ForeignCurrencyAmount { get; set; }
-        public object ForeignCurrencyCode { get; set; }
-        public object BaseRate { get; set; }
-        public object ExchangeRate { get; set; }
+        public string PartialAuthAmount { get; set; }
+        public string AvailableBalance { get; set; }
+        public string TipAmount { get; set; }
+        public string EMVCashBackAmount { get; set; }
+        public string SurchargeAmount { get; set; }
+        public string ForeignCurrencyAmount { get; set; }
+        public string ForeignCurrencyCode { get; set; }
+        public string BaseRate { get; set; }
+        public string ExchangeRate { get; set; }
         public string Pan { get; set; }
         public string CardType { get; set; }
         public string CardName { get; set; }
@@ -31,25 +31,25 @@ namespace MonerisDAL.App_Code
         public string SwipeIndicator { get; set; }
         public string FormFactor { get; set; }
         public string CvmIndicator { get; set; }
-        public object ReservedField1 { get; set; }
-        public object ReservedField2 { get; set; }
+        public string ReservedField1 { get; set; }
+        public string ReservedField2 { get; set; }
         public string AuthCode { get; set; }
-        public object InvoiceNumber { get; set; }
-        public object EMVEchoData { get; set; }
-        public object ReservedField3 { get; set; }
-        public object ReservedField4 { get; set; }
+        public string InvoiceNumber { get; set; }
+        public string EMVEchoData { get; set; }
+        public string ReservedField3 { get; set; }
+        public string ReservedField4 { get; set; }
         public string Aid { get; set; }
         public string AppLabel { get; set; }
-        public object AppPreferredName { get; set; }
+        public string AppPreferredName { get; set; }
         public string Arqc { get; set; }
         public string TvrArqc { get; set; }
         public string Tcacc { get; set; }
         public string TvrTcacc { get; set; }
-        public object Tsi { get; set; }
-        public object TokenResponseCode { get; set; }
-        public object Token { get; set; }
+        public string Tsi { get; set; }
+        public string TokenResponseCode { get; set; }
+        public string Token { get; set; }
         public string LogonRequired { get; set; }
-        public object EncryptedCardInfo { get; set; }
+        public string EncryptedCardInfo { get; set; }
         public string TransDate { get; set; }
         public string TransTime { get; set; }
         public string Amount { get; set; }
