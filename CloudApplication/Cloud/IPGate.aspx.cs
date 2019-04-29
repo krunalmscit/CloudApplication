@@ -74,7 +74,7 @@ namespace CloudApplication.Cloud
                 {
                     var resObject = (poolReceipt(URL));
                     txtAsyncResponse.Text = JsonConvert.SerializeObject(resObject, Formatting.Indented);
-                    //repo.InsertDateToDB(resObject, txtRequest.Text, txtResposne.Text, txtAsyncResponse.Text, txtTestCase.Text, txtMerchantId.Text.Trim(), txtToken.Text.Trim());
+                    repo.InsertDateToDB(resObject, txtRequest.Text, txtResposne.Text, txtAsyncResponse.Text, txtTestCase.Text, txtMerchantId.Text.Trim(), txtToken.Text.Trim());
                     //txtTxnNumber.Text = v.receipt.TransId;
                     Session["FollowOn"] = txtAsyncResponse.Text;
                     txtAmount.Text = "";

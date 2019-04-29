@@ -22,15 +22,15 @@ namespace MonerisDAL.App_Code
             public string ResponseCode { get; set; }
             public string ISO { get; set; }
             public string LanguageCode { get; set; }
-            public String PartialAuthAmount { get; set; }
-            public String AvailableBalance { get; set; }
-            public String TipAmount { get; set; }
-            public String EMVCashBackAmount { get; set; }
-            public String SurchargeAmount { get; set; }
-            public String ForeignCurrencyAmount { get; set; }
-            public String ForeignCurrencyCode { get; set; }
-            public String BaseRate { get; set; }
-            public String ExchangeRate { get; set; }
+            public string PartialAuthAmount { get; set; }
+            public string AvailableBalance { get; set; }
+            public string TipAmount { get; set; }
+            public string EMVCashBackAmount { get; set; }
+            public string SurchargeAmount { get; set; }
+            public string ForeignCurrencyAmount { get; set; }
+            public string ForeignCurrencyCode { get; set; }
+            public string BaseRate { get; set; }
+            public string ExchangeRate { get; set; }
             public string Pan { get; set; }
             public string CardType { get; set; }
             public string CardName { get; set; }
@@ -38,13 +38,13 @@ namespace MonerisDAL.App_Code
             public string SwipeIndicator { get; set; }
             public string FormFactor { get; set; }
             public string CvmIndicator { get; set; }
-            public String ReservedField1 { get; set; }
-            public String ReservedField2 { get; set; }
-            public String ReservedField3 { get; set; }
-            public String ReservedField4 { get; set; }
+            public string ReservedField1 { get; set; }
+            public string ReservedField2 { get; set; }
+            public string ReservedField3 { get; set; }
+            public string ReservedField4 { get; set; }
             public string AuthCode { get; set; }
-            public String InvoiceNumber { get; set; }
-            public String EMVEchoData { get; set; }          
+            public string InvoiceNumber { get; set; }
+            public string EMVEchoData { get; set; }          
             public string Aid { get; set; }
             public string AppLabel { get; set; }
             public string AppPreferredName { get; set; }
@@ -52,11 +52,11 @@ namespace MonerisDAL.App_Code
             public string TvrArqc { get; set; }
             public string Tcacc { get; set; }
             public string TvrTcacc { get; set; }
-            public String Tsi { get; set; }
-            public String TokenResponseCode { get; set; }
-            public String Token { get; set; }
+            public string Tsi { get; set; }
+            public string TokenResponseCode { get; set; }
+            public string Token { get; set; }
             public string LogonRequired { get; set; }
-            public String EncryptedCardInfo { get; set; }
+            public string EncryptedCardInfo { get; set; }
             public string TransDate { get; set; }
             public string TransTime { get; set; }
             public string Amount { get; set; }

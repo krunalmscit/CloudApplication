@@ -30,8 +30,8 @@
             font-family: "Lucida Console", Monaco, monospace;
             font-size: 1rem;
             line-height: 1.2;
-            color:white;
-            background-color:#363a42;
+            color: white;
+            background-color: #363a42;
         }
 
         input {
@@ -67,22 +67,21 @@
                 console.log('Edit clicked');
                 $(this).attr('hidden', 'hidden');
                 $('#imgAccept').removeAttr('hidden');
-                
-                $('#txtRequest').removeAttr ('disabled')
+
+                $('#txtRequest').removeAttr('disabled')
             });
             $('#imgAccept').click(function () {
                 console.log('Acccept Changes');
                 $(this).attr('hidden', 'hidden');
                 $('#imgEdit').removeAttr('hidden');
-                 $('#txtRequest').attr ('disabled', 'disabled')
+                $('#txtRequest').attr('disabled', 'disabled')
             });
 
         });
 
     </script>
+
     <form id="form1" runat="server">
-
-
         <div class="row col-lg-12" style="padding-top: 10px">
             <div class="col-lg-8">
                 Environment
@@ -465,8 +464,8 @@
                     <tr>
                         <td>
                             <b>Request</b>
-                           
-                           <%-- <img src="../Images/box_edit-512.png" height="20" width="20" id="imgEdit"  />
+
+                            <%-- <img src="../Images/box_edit-512.png" height="20" width="20" id="imgEdit"  />
                             <img src="../Images/Icon_33-512.png" height="20" width="20" id="imgAccept" hidden="hidden" />--%>
                         </td>
                         <td><b>Response</b></td>
@@ -501,7 +500,6 @@
             <%--<asp:TextBox ID="txtTranNote" runat="server" CssClass="form-control" placeholder="Comment to save in DB"></asp:TextBox>--%>
         </div>
         <div>
-            
         </div>
     </form>
 </body>
