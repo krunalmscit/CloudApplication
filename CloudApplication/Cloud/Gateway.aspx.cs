@@ -187,7 +187,7 @@ namespace CloudApplication.Cloud
                 {
                     transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
                 }
-                performTransactionAsync();
+                await performTransactionAsync();
             }
         }
 
@@ -199,12 +199,13 @@ namespace CloudApplication.Cloud
             transaction.txnType = "refund";
             transaction.request = new CloudTransaction.Request()
             {
-                amount = txtAmount.Text.ToString().Trim()
+                amount = txtAmount.Text.ToString().Trim(),
+                echoData = txtEchoData.Text.Trim()
             };
 
             if (string.IsNullOrEmpty(txtOrderID.Text.Trim().ToString()))
             {
-                transaction.request.orderId = "Test_KP_IndRrefund" + System.DateTime.Now.TimeOfDay.ToString();
+                transaction.request.orderId = "Test_KP_IndRefund" + System.DateTime.Now.TimeOfDay.ToString();
             }
             else
             {
