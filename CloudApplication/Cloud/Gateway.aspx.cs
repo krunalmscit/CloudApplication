@@ -224,7 +224,7 @@ namespace CloudApplication.Cloud
             transaction.request = new CloudTransaction.Request()
             {
                 amount = txtAmount.Text.Trim(),
-                originalAuthCode = txtOriginalInvNumber.Text.Trim(),
+                originalApprovalNumber = txtOriginalInvNumber.Text.Trim(),
                 echoData = "",
                 promoCode = ""
             };

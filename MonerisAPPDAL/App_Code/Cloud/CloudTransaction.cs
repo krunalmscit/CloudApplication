@@ -11,26 +11,76 @@ namespace MonerisDAL.App_Code
         public Request request { get; set; }
         
         public class Request
-        {
-            public string orderId { get; set; }
+        {   
+            private string _orderId;
+            public string orderId
+            {
+                get { return this._orderId; }
+                set { this._orderId = value; }
+            }
 
-            public string txnNumber { get; set; }
+            private string _txnNumber;
 
-            public string amount { get; set; }
+            public string txnNumber
+            {
+                get { return _txnNumber;}
+                set { _txnNumber = value; }
+            }
 
-            public string pairingToken { get; set; }
+            private string _amount;
 
-            public string terminalId { get; set; }
+            public string amount
+            {
+                get { return _amount; }
+                set { _amount = value; }
+            }
 
-            public string entryMethod { get; set; }
+            private string _pairingToken;
 
-            public string setTip { get; set; }
+            public string pairingToken
+            {
+                get { return _pairingToken; }
+                set { _pairingToken = value; }
+            }
 
-            public string tipType { get; set; }
+            private string _terminalId;
+
+            public string terminalId
+            {
+                get { return _terminalId; }
+                set { _terminalId = value; }
+            }
+
+            private string _entryMethod;
+
+            public string entryMethod
+            {
+                get { return _entryMethod; }
+                set { _entryMethod = value; }
+            }
+
+
+            private string _setTip;
+
+            public string setTip
+            {
+                get { return _setTip; }
+                set { _setTip = value; }
+            }
+
+            private string _tipType;
+
+            public string tipType
+            {
+                get { return _tipType; }
+                set { _tipType = value; }
+            }
+
+            
             public bool moto { get; set; }
             public Debit debit { get; set; }
             public Credit[] credit { get; set; }
-            public string originalAuthCode { get; set; }
+            public string originalApprovalNumber { get; set; }
             public string echoData { get; set; }
             public string promoCode { get; set; }
             public string mode { get; set; }
@@ -47,7 +97,6 @@ namespace MonerisDAL.App_Code
             public string entryOptions { get; set; }
             public string track { get; set; }
             public bool enabled { get; set; }
-            public string EntryMethod { get; set; }
 
             public class Debit
             {
