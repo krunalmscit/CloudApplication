@@ -77,7 +77,7 @@ namespace MonerisDAL.App_Code
             }
 
             
-            public bool moto { get; set; }
+            public bool? moto { get; set; }
             public Debit debit { get; set; }
             public Credit[] credit { get; set; }
             public string originalApprovalNumber { get; set; }
@@ -96,7 +96,7 @@ namespace MonerisDAL.App_Code
             public string highPrefix { get; set; }
             public string entryOptions { get; set; }
             public string track { get; set; }
-            public bool enabled { get; set; }
+            public bool? enabled { get; set; }
 
             public class Debit
             {

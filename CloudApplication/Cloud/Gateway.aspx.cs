@@ -229,8 +229,7 @@ namespace CloudApplication.Cloud
             {
                 amount = txtAmount.Text.Trim(),
                 originalApprovalNumber = txtOriginalInvNumber.Text.Trim(),
-                echoData = "",
-                promoCode = ""
+                echoData = txtEchoData.Text.Trim()                
             };
             if (drpEntryMethod.SelectedIndex != 0)
                 transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value;
@@ -268,10 +267,10 @@ namespace CloudApplication.Cloud
             transaction.terminalId = txtTerminalId.Text.Trim();
             transaction.txnType = "unpair";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            transaction.request = new CloudTransaction.Request()
-            {
+            //transaction.request = new CloudTransaction.Request()
+            //{
 
-            };
+            //};
             await performTransactionAsync();
         }
 
@@ -293,10 +292,10 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "batchClose";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            transaction.request = new CloudTransaction.Request()
-            {
+            //transaction.request = new CloudTransaction.Request()
+            //{
 
-            };
+            //};
             await performTransactionAsync();
         }
 
@@ -304,10 +303,10 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "openTotal";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            transaction.request = new CloudTransaction.Request()
-            {
+            //transaction.request = new CloudTransaction.Request()
+            //{
 
-            };
+            //};
             await performTransactionAsync();
         }
 
@@ -315,21 +314,22 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "initialization";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            transaction.request = new CloudTransaction.Request()
-            {
+            //transaction.request = new CloudTransaction.Request()
+            //{
 
-            };
+            //};
             await performTransactionAsync();
         }
 
         protected async void btnCardRead_Click(object sender, EventArgs e)
         {
-            transaction.txnType = "cardRead";
+            //transaction.txnType = "cardRead";
+            transaction.txnType = "encrypedCardRead";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            transaction.request = new CloudTransaction.Request()
-            {
+            //transaction.request = new CloudTransaction.Request()
+            //{
 
-            };
+            //};
             await performTransactionAsync();
         }
 
@@ -358,7 +358,9 @@ namespace CloudApplication.Cloud
             transaction.request = new CloudTransaction.Request()
             {
                 surchargeFee = txtSurcharge.Text.Trim(),
-                mode = drpSurcharge.SelectedItem.Value
+                mode = drpSurcharge.SelectedItem.Value,
+                enabled = null,
+                moto = null
             };
             await performTransactionAsync();
         }
@@ -492,7 +494,8 @@ namespace CloudApplication.Cloud
 
         protected async void btnaddBinRnage_Click(object sender, EventArgs e)
         {
-            transaction.txnType = "addGiftBinRange";
+            //transaction.txnType = "addGiftBinRange";
+            transaction.txnType = "addBinRange";
             transaction.request = new CloudTransaction.Request()
             {
                 lowPrefix = txtLowPrefix.Text.Trim(),
@@ -503,7 +506,8 @@ namespace CloudApplication.Cloud
 
         protected async void btnDeleteRange_Click(object sender, EventArgs e)
         {
-            transaction.txnType = "deleteGiftBinRange";
+            //transaction.txnType = "deleteGiftBinRange";
+            transaction.txnType = "deleteBinRange";
             transaction.request = new CloudTransaction.Request()
             {
                 lowPrefix = txtDelLowRange.Text.Trim(),
@@ -514,7 +518,8 @@ namespace CloudApplication.Cloud
 
         protected async void btnGiftCardRead_Click(object sender, EventArgs e)
         {
-            transaction.txnType = "giftCardRead";
+            //transaction.txnType = "giftUnEncryptedCardRead";
+            transaction.txnType = "unencryptedCardRead";
             transaction.request = new CloudTransaction.Request()
             {
                 entryOptions = txtEntryOption.Text.Trim(),
@@ -525,7 +530,7 @@ namespace CloudApplication.Cloud
 
         protected async void btnGetBinRange_Click(object sender, EventArgs e)
         {
-            transaction.txnType = "getGiftBinRanges";
+            transaction.txnType = "getBinRanges";
             transaction.request = new CloudTransaction.Request();
             await performTransactionAsync();
         }
