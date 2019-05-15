@@ -81,6 +81,16 @@ namespace CloudApplication.Cloud
             {
                 transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value.ToString();
             }
+
+            if (drpMonerisTokenization.SelectedIndex > 0)
+            {
+                transaction.request.monerisToken =  Convert.ToInt32(drpMonerisTokenization.SelectedValue);
+            }
+            if (!string.IsNullOrEmpty(txtMonerisToken.Text))
+            {
+                transaction.request.token = txtTxnNumber.Text.Trim();
+            }
+
            await performTransactionAsync();
         }
 
@@ -534,6 +544,15 @@ namespace CloudApplication.Cloud
             transaction.request = new CloudTransaction.Request();
             await performTransactionAsync();
         }
+        protected async void btntokenization_Click(object sender, EventArgs e)
+        {
+            transaction.txnType = "setTokenization";
+            transaction.request = new CloudTransaction.Request()
+            {
+                enabled = true
+            };
+            await performTransactionAsync();
+        }
 
         /// Helper Methods
         /// 
@@ -619,7 +638,10 @@ namespace CloudApplication.Cloud
                 {
                     if (cloudRece != null && (cloudRece.receipt.TxnName.ToLower().Trim() == "purchase" || cloudRece.receipt.TxnName.ToLower().Trim() == "preauth"))
                     {
-                        lblFollowOn.Visible = true;
+                        if (cloudRece.receipt.Error == "true")
+                            lblFollowOn.Visible = true;
+                        else
+                            lblFollowOn.Visible = false;
                         lblFollowOn.Text = Request.Url.ToString() + "?orderid=" + cloudRece.receipt.ReceiptId + "&txnNumber=" + cloudRece.receipt.TransId + "&storeId=" + txtStoreID.Text.Trim() + "&apiToken=" + txtAPIToken.Text.Trim() + "&terminalId=" + txtTerminalId.Text.Trim() + "&amount=" + cloudRece.receipt.Amount;
 
                     }
@@ -723,6 +745,6 @@ namespace CloudApplication.Cloud
             }
         }
 
-
+        
     }
 }

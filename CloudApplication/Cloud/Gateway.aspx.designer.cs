@@ -157,6 +157,24 @@ namespace CloudApplication.Cloud {
         protected global::System.Web.UI.WebControls.TextBox txtEchoData;
         
         /// <summary>
+        /// drpMonerisTokenization control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpMonerisTokenization;
+        
+        /// <summary>
+        /// txtMonerisToken control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMonerisToken;
+        
+        /// <summary>
         /// btnPurchase control.
         /// </summary>
         /// <remarks>
@@ -425,6 +443,24 @@ namespace CloudApplication.Cloud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSetTip;
+        
+        /// <summary>
+        /// chkTokenization control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkTokenization;
+        
+        /// <summary>
+        /// btntokenization control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btntokenization;
         
         /// <summary>
         /// chkmPOS control.

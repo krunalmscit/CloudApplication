@@ -91,7 +91,7 @@
                        </asp:RadioButtonList>
             </div>
             <div class="co-lg-4">
-                App version : v1.1
+               <span class="badge badge-dark"> App :<mark> V1.1</mark></span>
             </div>
         </div>
 
@@ -189,6 +189,26 @@
                         <asp:TextBox ID="txtEchoData" runat="server"></asp:TextBox>
                     </div>
                 </div>
+
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col-sm-2">Moneris Tokenization</div>
+                    <div class="col-sm-8">
+                        <asp:DropDownList ID="drpMonerisTokenization" runat="server">
+                            <asp:ListItem Value="-1" Text="Regular Purchase"></asp:ListItem>
+                            <asp:ListItem Value="0" Text="Use Token instead of card"></asp:ListItem>
+                            <asp:ListItem Value="1" Text="Purchase with - Token Request"></asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col-sm-2">Moneris Token</div>
+                    <div class="col-sm-8">
+                        <asp:TextBox ID="txtMonerisToken" runat="server" placeholder ="Token"></asp:TextBox>
+                    </div>
+                </div>
+
+
                 <hr />
 
                 <div class="row">
@@ -377,6 +397,15 @@
                     </div>
                     <div class="col-sm-4">
                         <asp:Button ID="btnSetTip" runat="server" OnClick="btnSetTip_Click" Text="SetTip" CssClass="btn btn-secondary" />
+                    </div>
+                </div>
+                <div class="row col-sm-12" style="padding-top: 10px;">
+                    <div class="col-sm-2">
+                        Tokenization
+                    </div>
+                    <div class="col-sm-10">
+                        <asp:CheckBox ID="chkTokenization" runat="server" AutoPostBack="false" CssClass="form-check-inline" />
+                        <asp:Button ID="btntokenization" runat="server" Text="E/D Tokenization" OnClick="btntokenization_Click" CssClass="btn btn-secondary " />
                     </div>
                 </div>
 

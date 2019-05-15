@@ -69,6 +69,7 @@ namespace MonerisDAL.App_Code
             }
 
             private string _tipType;
+            public int monerisToken;
 
             public string tipType
             {
@@ -97,6 +98,7 @@ namespace MonerisDAL.App_Code
             public string entryOptions { get; set; }
             public string track { get; set; }
             public bool? enabled { get; set; }
+            public string token { get; set; }
 
             public class Debit
             {
