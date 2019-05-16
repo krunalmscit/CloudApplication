@@ -69,7 +69,8 @@ namespace MonerisDAL.App_Code
             }
 
             private string _tipType;
-            public int monerisToken;
+            //public int monerisToken;
+            public string monerisToken;
 
             public string tipType
             {
@@ -99,6 +100,14 @@ namespace MonerisDAL.App_Code
             public string track { get; set; }
             public bool? enabled { get; set; }
             public string token { get; set; }
+            public string predefinedPercentage1 { get; set; }
+            public string predefinedPercentage2 { get; set; }
+            public string predefinedPercentage3 { get; set; }
+            public string tipWarningThreshold { get; set; }
+            public string enableSurcharge { get; set; }
+            public string surchargeFeeOnInterac { get; set; }
+            public string surchargeFeeOnInteracCashback { get; set; }
+            public string thresholdLimit { get; set; }
 
             public class Debit
             {

@@ -84,7 +84,8 @@ namespace CloudApplication.Cloud
 
             if (drpMonerisTokenization.SelectedIndex > 0)
             {
-                transaction.request.monerisToken =  Convert.ToInt32(drpMonerisTokenization.SelectedValue);
+                //transaction.request.monerisToken =  Convert.ToInt32(drpMonerisTokenization.SelectedValue);
+                transaction.request.monerisToken = drpMonerisTokenization.SelectedValue;
             }
             if (!string.IsNullOrEmpty(txtMonerisToken.Text))
             {
@@ -295,7 +296,32 @@ namespace CloudApplication.Cloud
             {
                 tipType = drpSetTip.SelectedItem.Value
             };
+            if (!string.IsNullOrEmpty(txtPercentPre1.Text))
+                transaction.request.predefinedPercentage1 = txtPercentPre1.Text.Trim();
+            if (!string.IsNullOrEmpty(txtPercentPre2.Text))
+                transaction.request.predefinedPercentage2 = txtPercentPre2.Text.Trim();
+            if (!string.IsNullOrEmpty(txtPercentPre3.Text))
+                transaction.request.predefinedPercentage3 = txtPercentPre3.Text.Trim();
+            if (!string.IsNullOrEmpty(txtTipPerThreshold.Text))
+                transaction.request.tipWarningThreshold = txtTipPerThreshold.Text.Trim();
+
+            //Reset a selections
+            drpSetTip.SelectedIndex = 0;
+            ResetTipAmounts();
+
             await performTransactionAsync();
+        }
+
+        private void ResetTipAmounts()
+        {
+            txtTipPerThreshold.Enabled = false;
+            txtTipPerThreshold.Text = "";
+            txtPercentPre1.Enabled = false;
+            txtPercentPre1.Text = "";
+            txtPercentPre2.Enabled = false;
+            txtPercentPre2.Text = "";
+            txtPercentPre3.Enabled = false;
+            txtPercentPre3.Text = "";
         }
 
         protected async void btnBatchClose_Click(object sender, EventArgs e)
@@ -324,10 +350,10 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "initialization";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            //transaction.request = new CloudTransaction.Request()
-            //{
+            transaction.request = new CloudTransaction.Request()
+            {
 
-            //};
+            };
             await performTransactionAsync();
         }
 
@@ -367,12 +393,15 @@ namespace CloudApplication.Cloud
             transaction.txnType = "surcharge";
             transaction.request = new CloudTransaction.Request()
             {
-                surchargeFee = txtSurcharge.Text.Trim(),
-                mode = drpSurcharge.SelectedItem.Value,
-                enabled = null,
-                moto = null
+                //surchargeFee = txtSurcharge.Text.Trim(),
+                //mode = drpSurcharge.SelectedItem.Value,
+                enableSurcharge = drpSurcharge.SelectedItem.Value,
+                surchargeFeeOnInterac = txtSurchargeFeeOnIntrac.Text.Trim(),
+                surchargeFeeOnInteracCashback = txtSurchargeFeeOnIntracWithCashback.Text.Trim(),
+                thresholdLimit= txtSurchargeThreshold.Text.Trim()
             };
             await performTransactionAsync();
+            ResetSurcharge();
         }
 
         protected async void btnBarCodeScan_Click(object sender, EventArgs e)
@@ -452,25 +481,32 @@ namespace CloudApplication.Cloud
             {
                 s = ex.InnerException.Message;
             }
-            //if (success)
-            //{
-            //    lblDbSave.Visible = true;
-            //    lblDbSave.Text = "Data Saved.";
-            //}
-            //else
-            //{
-            //    lblDbSave.Visible = true;
-            //    lblDbSave.Text = s;
-            //}
         }
 
         protected void drpSurcharge_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (drpSurcharge.SelectedItem.Value == "SD")
-                txtSurcharge.Enabled = false;
+            if (drpSurcharge.SelectedItem.Value == "0")
+            {
+                ResetSurcharge();
+            }
             else
-                txtSurcharge.Enabled = true;
+            { 
+                txtSurchargeFeeOnIntrac.Enabled = true;
+                txtSurchargeFeeOnIntracWithCashback.Enabled = true;
+                txtSurchargeThreshold.Enabled = true;
+            }
         }
+
+        private void ResetSurcharge()
+        {
+            txtSurchargeFeeOnIntrac.Enabled = false;
+            txtSurchargeFeeOnIntrac.Text = "";
+            txtSurchargeFeeOnIntracWithCashback.Enabled = false;
+            txtSurchargeFeeOnIntracWithCashback.Text = "";
+            txtSurchargeThreshold.Enabled = false;
+            txtSurchargeThreshold.Text = "";
+        }
+
         protected async void btnBalanceInquiery_Click(object sender, EventArgs e)
         {
             transaction.txnType = "balanceInquiry";
@@ -547,11 +583,11 @@ namespace CloudApplication.Cloud
         protected async void btntokenization_Click(object sender, EventArgs e)
         {
             transaction.txnType = "setTokenization";
-            transaction.request = new CloudTransaction.Request()
-            {
-                enabled = true
-            };
-            await performTransactionAsync();
+            if (chkTokenization.Checked)
+                transaction.request.enabled = true;
+            else
+                transaction.request.enabled = false;
+           await performTransactionAsync();
         }
 
         /// Helper Methods
@@ -745,6 +781,25 @@ namespace CloudApplication.Cloud
             }
         }
 
-        
+        protected void drpSetTip_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (drpSetTip.SelectedItem.Value == "TC")
+            {
+                
+                txtPercentPre1.Enabled = true;
+                txtPercentPre2.Enabled = true;
+                txtPercentPre3.Enabled = true;
+                txtTipPerThreshold.Enabled = true;
+            }
+            else {
+                
+                txtPercentPre1.Enabled = false;
+                txtPercentPre2.Enabled = false;
+                txtPercentPre3.Enabled = false;
+                txtTipPerThreshold.Enabled = false;
+                ResetTipAmounts();
+            }
+        }
+       
     }
 }

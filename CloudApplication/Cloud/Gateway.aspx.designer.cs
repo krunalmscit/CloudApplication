@@ -364,6 +364,15 @@ namespace CloudApplication.Cloud {
         protected global::System.Web.UI.WebControls.DropDownList drpCashbackMode;
         
         /// <summary>
+        /// btnCashback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCashback;
+        
+        /// <summary>
         /// txtDebit control.
         /// </summary>
         /// <remarks>
@@ -391,15 +400,6 @@ namespace CloudApplication.Cloud {
         protected global::System.Web.UI.WebControls.TextBox txtMCCashBackLimit;
         
         /// <summary>
-        /// btnCashback control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCashback;
-        
-        /// <summary>
         /// drpSurcharge control.
         /// </summary>
         /// <remarks>
@@ -409,15 +409,6 @@ namespace CloudApplication.Cloud {
         protected global::System.Web.UI.WebControls.DropDownList drpSurcharge;
         
         /// <summary>
-        /// txtSurcharge control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSurcharge;
-        
-        /// <summary>
         /// btnSurcharge control.
         /// </summary>
         /// <remarks>
@@ -425,6 +416,33 @@ namespace CloudApplication.Cloud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSurcharge;
+        
+        /// <summary>
+        /// txtSurchargeFeeOnIntrac control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSurchargeFeeOnIntrac;
+        
+        /// <summary>
+        /// txtSurchargeFeeOnIntracWithCashback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSurchargeFeeOnIntracWithCashback;
+        
+        /// <summary>
+        /// txtSurchargeThreshold control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSurchargeThreshold;
         
         /// <summary>
         /// drpSetTip control.
@@ -443,6 +461,42 @@ namespace CloudApplication.Cloud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSetTip;
+        
+        /// <summary>
+        /// txtPercentPre1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPercentPre1;
+        
+        /// <summary>
+        /// txtPercentPre2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPercentPre2;
+        
+        /// <summary>
+        /// txtPercentPre3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPercentPre3;
+        
+        /// <summary>
+        /// txtTipPerThreshold control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTipPerThreshold;
         
         /// <summary>
         /// chkTokenization control.

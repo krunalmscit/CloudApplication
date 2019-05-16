@@ -86,12 +86,12 @@
             <div class="col-lg-8">
                 Environment
                        <asp:RadioButtonList ID="rdEnv" runat="server" CssClass=" form-check form-check-inline" RepeatDirection="Horizontal" CellSpacing="10">
-                           <asp:ListItem Text="QA1 / QA2" Value="0"></asp:ListItem>
-                           <asp:ListItem Text="Internal QA" Value="1" Selected="True"></asp:ListItem>
+                           <asp:ListItem Text="QA1 / QA2" Value="0" Selected="True"></asp:ListItem>
+                           <asp:ListItem Text="Internal QA" Value="1"></asp:ListItem>
                        </asp:RadioButtonList>
             </div>
             <div class="co-lg-4">
-               <span class="badge badge-dark"> App :<mark> V1.1</mark></span>
+                <span class="badge badge-dark">App Version : V1.1</span>
             </div>
         </div>
 
@@ -113,7 +113,6 @@
                 <asp:Button ID="btnCardRead" runat="server" OnClick="btnCardRead_Click" Text="Enc Card Read" CssClass="btn btn-secondary" />
                 <asp:Button ID="btnBatchClose" runat="server" OnClick="btnBatchClose_Click" Text="Batch Close" CssClass="btn btn-secondary " />
                 <asp:Button ID="btnOpenTotal" runat="server" OnClick="btnOpenTotal_Click" Text="Open Total" CssClass="btn btn-secondary" />
-
             </div>
         </div>
 
@@ -186,14 +185,14 @@
                 <div class="row" style="padding-top: 10px;">
                     <div class="col-sm-2">Echo Data</div>
                     <div class="col-sm-8">
-                        <asp:TextBox ID="txtEchoData" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtEchoData" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                 </div>
 
                 <div class="row" style="padding-top: 10px;">
                     <div class="col-sm-2">Moneris Tokenization</div>
                     <div class="col-sm-8">
-                        <asp:DropDownList ID="drpMonerisTokenization" runat="server">
+                        <asp:DropDownList ID="drpMonerisTokenization" runat="server" CssClass="form-control">
                             <asp:ListItem Value="-1" Text="Regular Purchase"></asp:ListItem>
                             <asp:ListItem Value="0" Text="Use Token instead of card"></asp:ListItem>
                             <asp:ListItem Value="1" Text="Purchase with - Token Request"></asp:ListItem>
@@ -204,7 +203,7 @@
                 <div class="row" style="padding-top: 10px;">
                     <div class="col-sm-2">Moneris Token</div>
                     <div class="col-sm-8">
-                        <asp:TextBox ID="txtMonerisToken" runat="server" placeholder ="Token"></asp:TextBox>
+                        <asp:TextBox ID="txtMonerisToken" runat="server" placeholder="Token" CssClass="form-control"></asp:TextBox>
                     </div>
                 </div>
 
@@ -320,64 +319,110 @@
                             <asp:ListItem Text="Credit Cashback is enabled" Value="DE"></asp:ListItem>
                             <asp:ListItem Text="Credit and Debit Cashback is enabled" Value="HE"></asp:ListItem>
                         </asp:DropDownList>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <asp:TextBox ID="txtDebit" runat="server" Enabled="false" placeholder="Debit Cashback Limit" CssClass="form-control form-group"></asp:TextBox>
-                            <div class="input-group-append">
-                                <span class="input-group-text">.00</span>
-                            </div>
-                        </div>
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <asp:TextBox ID="txtVisaCashBackLimit" runat="server" Enabled="false" placeholder="VISA cashback Limit" CssClass="form-control form-group"></asp:TextBox>
-                            <div class="input-group-append">
-                                <span class="input-group-text">.00</span>
-                            </div>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <asp:TextBox ID="txtMCCashBackLimit" runat="server" Enabled="false" placeholder="MC cashback Limit" CssClass="form-control form-group"></asp:TextBox>
-                            <div class="input-group-append">
-                                <span class="input-group-text">.00</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-sm-4">
                         <asp:Button ID="btnCashback" runat="server" OnClick="btnCashback_Click" Text="Cashback" CssClass="btn btn-secondary" />
+                    </div>
+                </div>
+
+                <div class="row col-sm-12">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-10">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtDebit" runat="server" Enabled="false" placeholder="Debit Cashback Limit" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtVisaCashBackLimit" runat="server" Enabled="false" placeholder="VISA cashback Limit" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtMCCashBackLimit" runat="server" Enabled="false" placeholder="MC cashback Limit" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="row col-sm-12">
                     <div class="col-sm-2">
                         Surcharge Mode
                     </div>
-                    <div class="col-sm-3">
-                        <asp:DropDownList ID="drpSurcharge" runat="server" CssClass="form-control form-group" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="drpSurcharge_SelectedIndexChanged">
-                            <asp:ListItem Text="Disable Surcharge" Value="SD"></asp:ListItem>
+                    <div class="col-sm-6">
+                        <asp:DropDownList ID="drpSurcharge" runat="server" CssClass="form-control form-group" AutoPostBack="true" OnSelectedIndexChanged="drpSurcharge_SelectedIndexChanged">
+                            <%--<asp:ListItem Text="Disable Surcharge" Value="SD"></asp:ListItem>
                             <asp:ListItem Text="Enable surcharge on Cashback" Value="SC"></asp:ListItem>
-                            <asp:ListItem Text="Enable surcharge on debit" Value="SE"></asp:ListItem>
+                            <asp:ListItem Text="Enable surcharge on debit" Value="SE"></asp:ListItem>--%>
+                            <asp:ListItem Text="Disable Surcharge" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Enable Surcharge" Value="1"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <asp:TextBox ID="txtSurcharge" runat="server" Enabled="false" placeholder="Surcharge Fee (0.00)" CssClass="form-control form-group"></asp:TextBox>
-                            <%--  <div class="input-group-append">
-                                <span class="input-group-text">.00</span>
-                            </div>--%>
-                        </div>
-                    </div>
+
                     <div class="col-sm-4">
                         <asp:Button ID="btnSurcharge" runat="server" OnClick="btnSurcharge_Click" Text="Surcharge" CssClass="btn btn-secondary" />
+                    </div>
+                </div>
+
+
+                <div class="row col-sm-12">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtSurchargeFeeOnIntrac" runat="server" Enabled="false" placeholder="Surcharge Fee(0-9999)" CssClass="form-control form-group"></asp:TextBox>
+                                    <%--  <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>--%>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtSurchargeFeeOnIntracWithCashback" runat="server" Enabled="false" placeholder="Surcharge with Cashback (0-9999)" CssClass="form-control form-group"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtSurchargeThreshold" runat="server" Enabled="false" placeholder="Surcharge Threshold (0-9999)" CssClass="form-control form-group"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -387,7 +432,7 @@
                         Tip Type
                     </div>
                     <div class="col-sm-6">
-                        <asp:DropDownList ID="drpSetTip" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="drpSetTip" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drpSetTip_SelectedIndexChanged">
                             <asp:ListItem Text="Default" Value="0" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="TF (No Tip)" Value="TF"></asp:ListItem>
                             <asp:ListItem Text="TB ($ on Credit and Debit)" Value="TB"></asp:ListItem>
@@ -399,6 +444,62 @@
                         <asp:Button ID="btnSetTip" runat="server" OnClick="btnSetTip_Click" Text="SetTip" CssClass="btn btn-secondary" />
                     </div>
                 </div>
+
+
+                <div class="row col-sm-12">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <asp:TextBox ID="txtPercentPre1" runat="server" Enabled="false" placeholder="Pre1 % (0-99)" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <asp:TextBox ID="txtPercentPre2" runat="server" Enabled="false" placeholder="Pre2 % (0-99)" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row col-sm-12">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <asp:TextBox ID="txtPercentPre3" runat="server" Enabled="false" placeholder="Pre3 % (0-99)" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <asp:TextBox ID="txtTipPerThreshold" runat="server" Enabled="false" placeholder="Threshold % (0-99)" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="row col-sm-12" style="padding-top: 10px;">
                     <div class="col-sm-2">
                         Tokenization
