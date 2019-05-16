@@ -92,7 +92,7 @@ namespace CloudApplication.Cloud
                 transaction.request.token = txtTxnNumber.Text.Trim();
             }
 
-           await performTransactionAsync();
+            await performTransactionAsync();
         }
 
         protected async void btnPreauth_Click(object sender, EventArgs e)
@@ -240,7 +240,7 @@ namespace CloudApplication.Cloud
             {
                 amount = txtAmount.Text.Trim(),
                 originalApprovalNumber = txtOriginalInvNumber.Text.Trim(),
-                echoData = txtEchoData.Text.Trim()                
+                echoData = txtEchoData.Text.Trim()
             };
             if (drpEntryMethod.SelectedIndex != 0)
                 transaction.request.entryMethod = drpEntryMethod.SelectedItem.Value;
@@ -373,17 +373,18 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "cashback";
             transaction.terminalId = txtTerminalId.Text.Trim();
+
+
             transaction.request = new CloudTransaction.Request()
             {
                 //mode = drpCashbackMode.SelectedItem.Value,
                 enableCashback = drpCashbackMode.SelectedItem.Value,
-                predefinedAmount1 = "100",
-                predefinedAmount2 ="200",
-                predefinedAmount3 ="300",
-                allowCashbackCustomEntry = "1", //0 or 1
-                interacCashbackLimit ="999",
-                visaCashbackLimit = "999",
-                mastercardCashbackLimit = "999"
+                predefinedAmount1 = txtPre1CashbackAmount.Text.Trim(),
+                predefinedAmount2 = txtPre2CashbackAmount.Text.Trim(),
+                predefinedAmount3 = txtPre3CashbackAmount.Text.Trim(),
+                interacCashbackLimit = txtDebit.Text.Trim(),
+                visaCashbackLimit = txtVisaCashBackLimit.Text.Trim(),
+                mastercardCashbackLimit = txtMCCashBackLimit.Text.Trim()
 
                 //debit = new CloudTransaction.Request.Debit
                 //{
@@ -394,6 +395,10 @@ namespace CloudApplication.Cloud
                 //    new CloudTransaction.Request.Credit() { cardPlan = "M", limit = txtMCCashBackLimit.Text.Trim()}
                 //}
             };
+            if (chkCustomCashback.Checked)
+                transaction.request.allowCashbackCustomEntry = "1"; //0 or 1
+            else
+                transaction.request.allowCashbackCustomEntry = "0";
             await performTransactionAsync();
         }
 
@@ -402,12 +407,7 @@ namespace CloudApplication.Cloud
             transaction.txnType = "surcharge";
             transaction.request = new CloudTransaction.Request()
             {
-                //surchargeFee = txtSurcharge.Text.Trim(),
-                //mode = drpSurcharge.SelectedItem.Value,
-                enableSurcharge = drpSurcharge.SelectedItem.Value,
-                //surchargeFeeOnInterac = txtSurchargeFeeOnIntrac.Text.Trim(),
-                //surchargeFeeOnInteracCashback = txtSurchargeFeeOnIntracWithCashback.Text.Trim(),
-                //thresholdLimit= txtSurchargeThreshold.Text.Trim()
+                enableSurcharge = drpSurcharge.SelectedItem.Value
             };
 
             if (drpSurcharge.SelectedItem.Value == "1")
@@ -512,7 +512,7 @@ namespace CloudApplication.Cloud
                 ResetSurcharge();
             }
             else
-            { 
+            {
                 txtSurchargeFeeOnIntrac.Enabled = true;
                 txtSurchargeFeeOnIntracWithCashback.Enabled = true;
                 txtSurchargeThreshold.Enabled = true;
@@ -609,7 +609,7 @@ namespace CloudApplication.Cloud
                 transaction.request.enabled = true;
             else
                 transaction.request.enabled = false;
-           await performTransactionAsync();
+            await performTransactionAsync();
         }
 
         /// Helper Methods
@@ -679,15 +679,15 @@ namespace CloudApplication.Cloud
                     pollingReceipt = await Task.Run(() => poolReceipt(syncRecpt.Receipt.receiptUrl));
                     if (pollingReceipt.receipt.Error == "true")
                         break;
-                } while (pollingReceipt.receipt.Completed != "true" || pollingReceipt.receipt.Error != "false" );
-               
+                } while (pollingReceipt.receipt.Completed != "true" || pollingReceipt.receipt.Error != "false");
+
                 txtPollingReceipt.Text = JsonConvert.SerializeObject(pollingReceipt
                                                         , Formatting.Indented
                                                         , new JsonSerializerSettings
                                                         {
                                                             NullValueHandling = NullValueHandling.Ignore
                                                         });
-                if(!string.IsNullOrEmpty(txtPollingReceipt.Text.Trim()))
+                if (!string.IsNullOrEmpty(txtPollingReceipt.Text.Trim()))
                     Session["FollowOn"] = txtPollingReceipt.Text;
 
 
@@ -745,11 +745,12 @@ namespace CloudApplication.Cloud
 
         public async Task<CloudReceipt.Rootobject> poolReceipt(string URL)
         {
-            using (HttpClient client = new HttpClient()) {
+            using (HttpClient client = new HttpClient())
+            {
                 var result = await client.GetStringAsync(URL);
                 return JsonConvert.DeserializeObject<CloudReceipt.Rootobject>(result);
             }
-            
+
             //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
             //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             //string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
@@ -777,43 +778,72 @@ namespace CloudApplication.Cloud
 
         protected void drpCashbackMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (drpCashbackMode.SelectedItem.Value == "CD")
+
+            if (drpCashbackMode.SelectedValue == "1")
             {
-                txtDebit.Enabled = false;
-                txtVisaCashBackLimit.Enabled = false;
-                txtMCCashBackLimit.Enabled = false;
-            }
-            if (drpCashbackMode.SelectedItem.Value == "CE")
-            {
-                txtDebit.Enabled = true;
-                txtVisaCashBackLimit.Enabled = false;
-                txtMCCashBackLimit.Enabled = false;
-            }
-            if (drpCashbackMode.SelectedItem.Value == "DE")
-            {
-                txtDebit.Enabled = false;
-                txtVisaCashBackLimit.Enabled = true;
-                txtMCCashBackLimit.Enabled = true;
-            }
-            if (drpCashbackMode.SelectedItem.Value == "HE")
-            {
+                chkCustomCashback.Enabled = true;
                 txtDebit.Enabled = true;
                 txtVisaCashBackLimit.Enabled = true;
                 txtMCCashBackLimit.Enabled = true;
+                txtPre1CashbackAmount.Enabled = true;
+                txtPre2CashbackAmount.Enabled = true;
+                txtPre3CashbackAmount.Enabled = true;
             }
+            else if (drpCashbackMode.SelectedValue == "0")
+            {
+                chkCustomCashback.Checked = false;
+                chkCustomCashback.Enabled = false;
+                txtDebit.Enabled = false;
+                txtDebit.Text = "";
+                txtVisaCashBackLimit.Enabled = false;
+                txtVisaCashBackLimit.Text = "";
+                txtMCCashBackLimit.Enabled = false;
+                txtMCCashBackLimit.Text = "";
+                txtPre1CashbackAmount.Enabled = false;
+                txtPre1CashbackAmount.Text = "";
+                txtPre2CashbackAmount.Enabled = false;
+                txtPre2CashbackAmount.Text = "";
+                txtPre3CashbackAmount.Enabled = false;
+                txtPre3CashbackAmount.Text = "";
+            }
+            //if (drpCashbackMode.SelectedItem.Value == "CD")
+            //{
+            //    txtDebit.Enabled = false;
+            //    txtVisaCashBackLimit.Enabled = false;
+            //    txtMCCashBackLimit.Enabled = false;
+            //}
+            //if (drpCashbackMode.SelectedItem.Value == "CE")
+            //{
+            //    txtDebit.Enabled = true;
+            //    txtVisaCashBackLimit.Enabled = false;
+            //    txtMCCashBackLimit.Enabled = false;
+            //}
+            //if (drpCashbackMode.SelectedItem.Value == "DE")
+            //{
+            //    txtDebit.Enabled = false;
+            //    txtVisaCashBackLimit.Enabled = true;
+            //    txtMCCashBackLimit.Enabled = true;
+            //}
+            //if (drpCashbackMode.SelectedItem.Value == "HE")
+            //{
+            //    txtDebit.Enabled = true;
+            //    txtVisaCashBackLimit.Enabled = true;
+            //    txtMCCashBackLimit.Enabled = true;
+            //}
         }
 
         protected void drpSetTip_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (drpSetTip.SelectedItem.Value != "TF" || drpSetTip.SelectedIndex != 0)
-            {   
+            {
                 txtPercentPre1.Enabled = true;
                 txtPercentPre2.Enabled = true;
                 txtPercentPre3.Enabled = true;
                 txtTipPerThreshold.Enabled = true;
             }
-            else {
-                
+            else
+            {
+
                 txtPercentPre1.Enabled = false;
                 txtPercentPre2.Enabled = false;
                 txtPercentPre3.Enabled = false;
@@ -821,6 +851,6 @@ namespace CloudApplication.Cloud
                 ResetTipAmounts();
             }
         }
-       
+
     }
 }

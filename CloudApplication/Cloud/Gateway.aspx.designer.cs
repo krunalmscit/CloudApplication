@@ -373,6 +373,15 @@ namespace CloudApplication.Cloud {
         protected global::System.Web.UI.WebControls.Button btnCashback;
         
         /// <summary>
+        /// chkCustomCashback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkCustomCashback;
+        
+        /// <summary>
         /// txtDebit control.
         /// </summary>
         /// <remarks>
@@ -398,6 +407,33 @@ namespace CloudApplication.Cloud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMCCashBackLimit;
+        
+        /// <summary>
+        /// txtPre1CashbackAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPre1CashbackAmount;
+        
+        /// <summary>
+        /// txtPre2CashbackAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPre2CashbackAmount;
+        
+        /// <summary>
+        /// txtPre3CashbackAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPre3CashbackAmount;
         
         /// <summary>
         /// drpSurcharge control.

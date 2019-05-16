@@ -291,7 +291,6 @@
             </div>
             <div class="col-lg-6">
                 <h3>Admin Transactions</h3>
-
                 <hr />
 
                 <div class="row col-sm-12">
@@ -300,7 +299,6 @@
                     </div>
                     <div class="col-sm-6">
                         <asp:TextBox ID="txtPairingToken" runat="server" placeholder="Pairing Token" CssClass="form-control"></asp:TextBox>
-
                     </div>
                     <div class="col-sm-4">
                         <asp:Button ID="btnPairing" runat="server" OnClick="btnPairing_Click" Text="Pair" CssClass="btn btn-secondary" />
@@ -314,10 +312,8 @@
                     </div>
                     <div class="col-sm-6">
                         <asp:DropDownList ID="drpCashbackMode" runat="server" CssClass="form-control form-group" AutoPostBack="true" OnSelectedIndexChanged="drpCashbackMode_SelectedIndexChanged">
-
                             <asp:ListItem Text="Disable Cashback" Value="0"></asp:ListItem>
                             <asp:ListItem Text="Enable Cashback" Value="1"></asp:ListItem>
-                            
                             <%--<asp:ListItem Text="Cashback is disabled (default)" Value="C"></asp:ListItem>
                             <asp:ListItem Text="Debit Cashback is enabled" Value="CE"></asp:ListItem>
                             <asp:ListItem Text="Credit Cashback is enabled" Value="DE"></asp:ListItem>
@@ -334,36 +330,49 @@
                     <div class="col-sm-2"></div>
 
                     <div class="col-sm-10">
-
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-12">
+                                <asp:CheckBox runat="server" Text="Allow Custom entry on cash back" Enabled="false" ID="chkCustomCashback" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2"></div>
+                </div>
+
+
+                <div class="row col-sm-12">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-4">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <asp:TextBox ID="txtDebit" runat="server" Enabled="false" placeholder="Debit Cashback Limit" CssClass="form-control form-group"></asp:TextBox>
+                                    <asp:TextBox ID="txtDebit" runat="server" Enabled="false" placeholder="Debit" CssClass="form-control form-group"></asp:TextBox>
                                     <div class="input-group-append">
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <asp:TextBox ID="txtVisaCashBackLimit" runat="server" Enabled="false" placeholder="VISA cashback Limit" CssClass="form-control form-group"></asp:TextBox>
+                                    <asp:TextBox ID="txtVisaCashBackLimit" runat="server" Enabled="false" placeholder="VISA" CssClass="form-control form-group"></asp:TextBox>
                                     <div class="input-group-append">
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <asp:TextBox ID="txtMCCashBackLimit" runat="server" Enabled="false" placeholder="MC cashback Limit" CssClass="form-control form-group"></asp:TextBox>
+                                    <asp:TextBox ID="txtMCCashBackLimit" runat="server" Enabled="false" placeholder="MC" CssClass="form-control form-group"></asp:TextBox>
                                     <div class="input-group-append">
                                         <span class="input-group-text">.00</span>
                                     </div>
@@ -372,7 +381,53 @@
 
                         </div>
                     </div>
+                     <div class="col-sm-4"></div>
                 </div>
+
+                <div class="row col-sm-12">
+                    <div class="col-sm-2"> </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtPre1CashbackAmount" runat="server" Enabled="false" placeholder="Pre 1" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtPre2CashbackAmount" runat="server" Enabled="false" placeholder="Pre 2" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <asp:TextBox ID="txtPre3CashbackAmount" runat="server" Enabled="false" placeholder="Pre 3" CssClass="form-control form-group"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+
+
                 <div class="row col-sm-12">
                     <div class="col-sm-2">
                         Surcharge Mode
@@ -393,12 +448,16 @@
                 </div>
 
 
+
+
+
+
                 <div class="row col-sm-12">
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
@@ -410,7 +469,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
@@ -418,7 +477,7 @@
                                     <asp:TextBox ID="txtSurchargeFeeOnIntracWithCashback" runat="server" Enabled="false" placeholder="Surcharge with Cashback (0-9999)" CssClass="form-control form-group"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
@@ -427,6 +486,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-2">
                     </div>
                 </div>
 
