@@ -314,10 +314,14 @@
                     </div>
                     <div class="col-sm-6">
                         <asp:DropDownList ID="drpCashbackMode" runat="server" CssClass="form-control form-group" AutoPostBack="true" OnSelectedIndexChanged="drpCashbackMode_SelectedIndexChanged">
-                            <asp:ListItem Text="Cashback is disabled (default)" Value="CD"></asp:ListItem>
+
+                            <asp:ListItem Text="Disable Cashback" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Enable Cashback" Value="1"></asp:ListItem>
+                            
+                            <%--<asp:ListItem Text="Cashback is disabled (default)" Value="C"></asp:ListItem>
                             <asp:ListItem Text="Debit Cashback is enabled" Value="CE"></asp:ListItem>
                             <asp:ListItem Text="Credit Cashback is enabled" Value="DE"></asp:ListItem>
-                            <asp:ListItem Text="Credit and Debit Cashback is enabled" Value="HE"></asp:ListItem>
+                            <asp:ListItem Text="Credit and Debit Cashback is enabled" Value="HE"></asp:ListItem>--%>
                         </asp:DropDownList>
 
                     </div>

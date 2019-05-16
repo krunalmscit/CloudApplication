@@ -375,15 +375,24 @@ namespace CloudApplication.Cloud
             transaction.terminalId = txtTerminalId.Text.Trim();
             transaction.request = new CloudTransaction.Request()
             {
-                mode = drpCashbackMode.SelectedItem.Value,
-                debit = new CloudTransaction.Request.Debit
-                {
-                    limit = txtDebit.Text.Trim()
-                },
-                credit = new CloudTransaction.Request.Credit[] {
-                    new CloudTransaction.Request.Credit() {  cardPlan ="V", limit = txtVisaCashBackLimit.Text.Trim() },
-                    new CloudTransaction.Request.Credit() { cardPlan = "M", limit = txtMCCashBackLimit.Text.Trim()}
-                }
+                //mode = drpCashbackMode.SelectedItem.Value,
+                enableCashback = drpCashbackMode.SelectedItem.Value,
+                predefinedAmount1 = "100",
+                predefinedAmount2 ="200",
+                predefinedAmount3 ="300",
+                allowCashbackCustomEntry = "1", //0 or 1
+                interacCashbackLimit ="999",
+                visaCashbackLimit = "999",
+                mastercardCashbackLimit = "999"
+
+                //debit = new CloudTransaction.Request.Debit
+                //{
+                //    limit = txtDebit.Text.Trim()
+                //},
+                //credit = new CloudTransaction.Request.Credit[] {
+                //    new CloudTransaction.Request.Credit() {  cardPlan ="V", limit = txtVisaCashBackLimit.Text.Trim() },
+                //    new CloudTransaction.Request.Credit() { cardPlan = "M", limit = txtMCCashBackLimit.Text.Trim()}
+                //}
             };
             await performTransactionAsync();
         }
@@ -396,10 +405,23 @@ namespace CloudApplication.Cloud
                 //surchargeFee = txtSurcharge.Text.Trim(),
                 //mode = drpSurcharge.SelectedItem.Value,
                 enableSurcharge = drpSurcharge.SelectedItem.Value,
-                surchargeFeeOnInterac = txtSurchargeFeeOnIntrac.Text.Trim(),
-                surchargeFeeOnInteracCashback = txtSurchargeFeeOnIntracWithCashback.Text.Trim(),
-                thresholdLimit= txtSurchargeThreshold.Text.Trim()
+                //surchargeFeeOnInterac = txtSurchargeFeeOnIntrac.Text.Trim(),
+                //surchargeFeeOnInteracCashback = txtSurchargeFeeOnIntracWithCashback.Text.Trim(),
+                //thresholdLimit= txtSurchargeThreshold.Text.Trim()
             };
+
+            if (drpSurcharge.SelectedItem.Value == "1")
+            {
+                transaction.request.surchargeFeeOnInterac = txtSurchargeFeeOnIntrac.Text.Trim();
+                transaction.request.surchargeFeeOnInteracCashback = txtSurchargeFeeOnIntracWithCashback.Text.Trim();
+                transaction.request.thresholdLimit = txtSurchargeThreshold.Text.Trim();
+            }
+            else if (drpSurcharge.SelectedItem.Value == "0")
+            {
+                transaction.request.surchargeFeeOnInterac = "0";
+                transaction.request.surchargeFeeOnInteracCashback = "0";
+                transaction.request.thresholdLimit = "0";
+            }
             await performTransactionAsync();
             ResetSurcharge();
         }
@@ -783,9 +805,8 @@ namespace CloudApplication.Cloud
 
         protected void drpSetTip_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (drpSetTip.SelectedItem.Value == "TC")
-            {
-                
+            if (drpSetTip.SelectedItem.Value != "TF" || drpSetTip.SelectedIndex != 0)
+            {   
                 txtPercentPre1.Enabled = true;
                 txtPercentPre2.Enabled = true;
                 txtPercentPre3.Enabled = true;

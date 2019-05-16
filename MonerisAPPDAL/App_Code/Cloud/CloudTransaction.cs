@@ -85,8 +85,8 @@ namespace MonerisDAL.App_Code
             public string originalApprovalNumber { get; set; }
             public string echoData { get; set; }
             public string promoCode { get; set; }
-            public string mode { get; set; }
-            public string surchargeFee { get; set; }
+            //public string mode { get; set; }
+            //public string surchargeFee { get; set; }
             //public bool enable { get; set; }
             public string displayTimeout { get; set; }
             public string scanType { get; set; }
@@ -108,6 +108,14 @@ namespace MonerisDAL.App_Code
             public string surchargeFeeOnInterac { get; set; }
             public string surchargeFeeOnInteracCashback { get; set; }
             public string thresholdLimit { get; set; }
+            public string enableCashback { get; set; }
+            public string predefinedAmount1 { get; set; }
+            public string predefinedAmount2 { get; set; }
+            public string predefinedAmount3 { get; set; }
+            public string allowCashbackCustomEntry { get; set; }
+            public string interacCashbackLimit { get; set; }
+            public string visaCashbackLimit { get; set; }
+            public string mastercardCashbackLimit { get; set; }
 
             public class Debit
             {
