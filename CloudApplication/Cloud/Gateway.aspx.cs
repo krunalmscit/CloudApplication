@@ -15,7 +15,7 @@ namespace CloudApplication.Cloud
     {
         /*Add Some Comment */
         private static string postUrl = "http://ec2-52-73-55-162.compute-1.amazonaws.com/Terminal/"; // QA1, QA2
-        private static string jsonRequest = string.Empty;
+        //private static string jsonRequest = string.Empty;
         private static string resultContent = string.Empty;
         CloudTransaction transaction = new CloudTransaction();
         private CloudPoolingResponse.RootObject syncRecpt = new CloudPoolingResponse.RootObject();
@@ -278,10 +278,7 @@ namespace CloudApplication.Cloud
             transaction.terminalId = txtTerminalId.Text.Trim();
             transaction.txnType = "unpair";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            //transaction.request = new CloudTransaction.Request()
-            //{
-
-            //};
+            transaction.request = new CloudTransaction.Request();
             await performTransactionAsync();
         }
 
@@ -328,10 +325,7 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "batchClose";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            //transaction.request = new CloudTransaction.Request()
-            //{
-
-            //};
+            transaction.request = new CloudTransaction.Request();
             await performTransactionAsync();
         }
 
@@ -339,10 +333,7 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "openTotal";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            //transaction.request = new CloudTransaction.Request()
-            //{
-
-            //};
+            transaction.request = new CloudTransaction.Request();
             await performTransactionAsync();
         }
 
@@ -350,10 +341,7 @@ namespace CloudApplication.Cloud
         {
             transaction.txnType = "initialization";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            transaction.request = new CloudTransaction.Request()
-            {
-
-            };
+            transaction.request = new CloudTransaction.Request();
             await performTransactionAsync();
         }
 
@@ -362,10 +350,7 @@ namespace CloudApplication.Cloud
             //transaction.txnType = "cardRead";
             transaction.txnType = "encrypedCardRead";
             transaction.terminalId = txtTerminalId.Text.Trim();
-            //transaction.request = new CloudTransaction.Request()
-            //{
-
-            //};
+            transaction.request = new CloudTransaction.Request();
             await performTransactionAsync();
         }
 
@@ -612,12 +597,23 @@ namespace CloudApplication.Cloud
             await performTransactionAsync();
         }
 
+        protected async void btnGetReceiptFromPOSPAD_Click(object sender, EventArgs e)
+        {
+            transaction.txnType = "getReceipt";
+            transaction.request = new CloudTransaction.Request()
+            {
+                receiptType = drpRceiptType.SelectedValue
+            };
+            await performTransactionAsync();
+        }
+
         /// Helper Methods
         /// 
         private async Task performTransactionAsync()
         {
             if (lblFollowOn.Visible == true)
                 lblFollowOn.Visible = false;
+         
             transaction.storeId = txtStoreID.Text.Trim();
             transaction.apiToken = txtAPIToken.Text.Trim();
             transaction.terminalId = txtTerminalId.Text.Trim();
@@ -633,14 +629,15 @@ namespace CloudApplication.Cloud
             if (chkMoto.Checked)
                 transaction.request.moto = true;
 
-            txtRequest.Text = JsonConvert.SerializeObject(
+            string jsonRequest = JsonConvert.SerializeObject(
                                             transaction,
                                             Formatting.Indented,
                                             new JsonSerializerSettings
                                             {
                                                 NullValueHandling = NullValueHandling.Ignore
                                             });
-            jsonRequest = JsonConvert.SerializeObject(transaction, Formatting.Indented);
+            txtRequest.Text = jsonRequest;
+            //jsonRequest = JsonConvert.SerializeObject(transaction, Formatting.Indented);
             //lblRequestUrl.Text = postUrl;
             StringContent content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
             if (!string.IsNullOrEmpty(txtPollingReceipt.Text))
@@ -696,7 +693,7 @@ namespace CloudApplication.Cloud
                 {
                     if (cloudRece != null && (cloudRece.receipt.TxnName.ToLower().Trim() == "purchase" || cloudRece.receipt.TxnName.ToLower().Trim() == "preauth"))
                     {
-                        if (cloudRece.receipt.Error == "true")
+                        if (cloudRece.receipt.Error != "true")
                             lblFollowOn.Visible = true;
                         else
                             lblFollowOn.Visible = false;
@@ -852,5 +849,6 @@ namespace CloudApplication.Cloud
             }
         }
 
+        
     }
 }

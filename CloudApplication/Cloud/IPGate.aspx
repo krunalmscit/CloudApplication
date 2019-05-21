@@ -43,8 +43,8 @@
     </style>
 </head>
 <body>
-   <form id="form1" runat="server">
-        <%-- <div class="col-lg-12">
+    <form id="form1" runat="server">
+        <%-- <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">Panel Header</div>
                 <div class="card-body">Panel  Bodey</div>
@@ -54,14 +54,14 @@
         </div>--%>
 
 
-       
-        <div class="col-lg-12 ">
+
+        <div class="col-sm-12 ">
             <div class=" card">
                 <div class="card-header">
                     Store Settings
                 </div>
                 <div class="card-body">
-                    <div class="col-lg-12 row">
+                    <div class="col-sm-12 row">
                         <div class="col-sm-4">
                             Merchant #
                         <asp:TextBox ID="txtMerchantId" runat="server" CssClass="form-control" placeHolder="Merchant Number"></asp:TextBox>
@@ -80,10 +80,10 @@
         </div>
 
 
-        <div class="col-lg-12" style="padding-top: 20px;">
+        <div class="col-sm-12" style="padding-top: 20px;">
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
                             Financial Transactions
@@ -91,50 +91,50 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <label>Test Case</label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <label>Amount</label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <asp:TextBox ID="txtTestCase" CssClass="form-control" placeholder="Test Case" runat="server"></asp:TextBox>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <asp:TextBox ID="txtAmount" CssClass="form-control" runat="server" placeholder="Amount"></asp:TextBox>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <label>Invoice</label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <label>Invoice </label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <asp:TextBox ID="txtInvoice" CssClass="form-control" runat="server" placeholder="Invoice Number"></asp:TextBox>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <asp:TextBox ID="txtOriginalinvNumber" CssClass="form-control" runat="server" placeholder="Original Invoice Number (Force Post)"></asp:TextBox>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-sm-12">
                                     <label>Echo Data</label>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-sm-12">
                                     <asp:TextBox ID="txtEchoData" CssClass="form-control" runat="server" placeholder="Echo Data"></asp:TextBox>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <label>Entry Method</label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <label>Moto</label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <asp:RadioButtonList ID="rdEntryMethods" CssClass="radio-inline" runat="server" AutoPostBack="false">
                                         <asp:ListItem Value="N/A" Text="No Option" Selected="True"></asp:ListItem>
                                         <asp:ListItem Value="B" Text="Cash back (Only Debit)"></asp:ListItem>
                                         <asp:ListItem Value="M" Text="Manual Entry"></asp:ListItem>
                                     </asp:RadioButtonList>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-6">
                                     <asp:DropDownList ID="drpMoto" runat="server" CssClass="form-control" AutoPostBack="false">
                                         <asp:ListItem Value="false" Text="False" Selected="True"></asp:ListItem>
                                         <asp:ListItem Value="true" Text="True"></asp:ListItem>
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
                             Admin Transactions
@@ -187,7 +187,7 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:Button ID="btnEnableCashBack" CssClass="btn btn-outline-danger" runat="server" Text="Enable Cash Back" OnClick="btnEnableCashBack_Click"/>
+                                    <asp:Button ID="btnEnableCashBack" CssClass="btn btn-outline-danger" runat="server" Text="Enable Cash Back" OnClick="btnEnableCashBack_Click" />
                                 </div>
                             </div>
                             <div class="col-sm-12 row">
@@ -242,7 +242,7 @@
             <br />
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">Gift and Loyalty Transactions</div>
                         <div class="card-body">
@@ -253,13 +253,13 @@
                             <asp:Button ID="btnGRefund" runat="server" CssClass="btn btn-outline-dark" Text="G Refund" OnClick="btnGRefund_Click" />
                             <asp:Button ID="btnGVoid" runat="server" CssClass="btn btn-outline-dark" Text="G Void" OnClick="btnGVoid_Click" />
                             <asp:Button ID="btnLPurchase" runat="server" CssClass="btn btn-outline-dark" Text="L Purchase" OnClick="btnLPurchase_Click" />
-                            <asp:Button ID="btnLRefund" runat="server" CssClass="btn btn-outline-dark" Text="L Refund" OnClick="btnLRefund_Click"/>
+                            <asp:Button ID="btnLRefund" runat="server" CssClass="btn btn-outline-dark" Text="L Refund" OnClick="btnLRefund_Click" />
                             <asp:Button ID="btnLVoid" runat="server" CssClass="btn btn-outline-dark" Text="L Void" OnClick="btnLVoid_Click" />
                         </div>
                     </div>
                 </div>
 
-                <div class=" col-lg-6">
+                <div class=" col-sm-6">
                     <div class="card ">
                         <div class="card-header">Gift and Loyalty Admin</div>
                         <div class="card-body">

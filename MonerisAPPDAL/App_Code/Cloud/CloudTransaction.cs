@@ -116,6 +116,7 @@ namespace MonerisDAL.App_Code
             public string interacCashbackLimit { get; set; }
             public string visaCashbackLimit { get; set; }
             public string mastercardCashbackLimit { get; set; }
+            public string receiptType { get; set; }
 
             public class Debit
             {

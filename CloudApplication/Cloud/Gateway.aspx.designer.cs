@@ -661,6 +661,24 @@ namespace CloudApplication.Cloud {
         protected global::System.Web.UI.WebControls.Label lblFollowOn;
         
         /// <summary>
+        /// drpRceiptType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpRceiptType;
+        
+        /// <summary>
+        /// btnGetReceiptFromPOSPAD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGetReceiptFromPOSPAD;
+        
+        /// <summary>
         /// txtRequest control.
         /// </summary>
         /// <remarks>
