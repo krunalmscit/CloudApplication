@@ -26,9 +26,9 @@ namespace CloudApplication.Cloud
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //txtStoreID.Text = "monca00597";
-            //txtAPIToken.Text = "7Xq0zhMcaVKBCkAV4rX5";
-            //txtTerminalId.Text = "E1194378";
+            txtStoreID.Text = "monca00597";
+            txtAPIToken.Text = "7Xq0zhMcaVKBCkAV4rX5";
+            txtTerminalId.Text = "E1205613";
 
             if (!IsPostBack)
             {
@@ -698,7 +698,6 @@ namespace CloudApplication.Cloud
                         else
                             lblFollowOn.Visible = false;
                         lblFollowOn.Text = Request.Url.ToString() + "?orderid=" + cloudRece.receipt.ReceiptId + "&txnNumber=" + cloudRece.receipt.TransId + "&storeId=" + txtStoreID.Text.Trim() + "&apiToken=" + txtAPIToken.Text.Trim() + "&terminalId=" + txtTerminalId.Text.Trim() + "&amount=" + cloudRece.receipt.Amount;
-
                     }
                     else { lblFollowOn.Visible = false; }
                 }
@@ -708,7 +707,7 @@ namespace CloudApplication.Cloud
                 }
 
                 //if (!string.IsNullOrEmpty(txtRequest.Text) && !string.IsNullOrEmpty(txtRespose.Text) && !string.IsNullOrEmpty(txtPollingReceipt.Text))
-                //    db.SaveToDb(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
+                    // db.InsertToCloudTransactions(txtRequest.Text.Trim(), txtRespose.Text.Trim(), txtPollingReceipt.Text.Trim());
             }
             else
             {
